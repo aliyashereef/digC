@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <style type="text/css">
+            * {margin:0; padding:0px;}
+            p {font-size:15px; color: black; font-family: lato;}
+            h {
+                font-size:24px;
+                color: black;
+                font-family: lato-Bold;
+            }
+            .button{
+                padding: 15px;
+                font-family: lato-Bold;
+                font-size: 16px;
+                text-align: center;
+                color: #fff;
+                border: 0;
+                width: 80%%;
+                margin: 0 auto;
+                display: table;
+                background-color: #209B8E;
+            }
+            .swipe-img{
+                position: absolute;
+                left: 0px;
+                right: 10px;
+                bottom: 0px;
+            }
+            .pubdata {
+                color:#AAADAD;
+                font-size: 12px;
+                align : leftwards;
+                margin-top: 12px;
+                margin-left: 10px;
+                margin-bottom: 12px;
+                font-family: lato-Bold;
+            }
+            .pagination{
+                color:#AAADAD;
+                font-size: 14px;
+                float: right;
+                margin-top: 10px;
+                margin-right: 10px;
+                margin-bottom: 20px;
+            }
+            .sectn{
+                margin-bottom: 20px;
+                border-radius:1px;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="http://code.jquery.com/jquery-git1.js"></script>
+        <script>
+            var windowWidth = $(window).width();
+            var height = parseInt(windowWidth) / 20;
+            $("#buttonId").css({
+                               height: height+'px'
+                               });
+        </script>
+        <div id = "imageview" class="sectn" style="position: relative;">
+            <img src="put_article_highlight_image_here" width="100%%" style= "position: relative;">
+            <img src="SwipeText.png" width="90%%"  class="swipe-img" />
+        </div>
+        <div id = "titleview" class = "title" style = "margin:10">
+            <h id = "put_title_here"></h>
+        </div>
+        <div>
+            <p class="pubdata"></p>
+        </div>
+        <div id = "contentview" class = "sectn" style = "margin:10">
+            <p id = "put_content_here"></p>
+        </div>
+        <div id = "buttonId" style="position: relative;" class="sectn">
+            <a class = "button" width = "100%%">Post a comment</a>
+        </div>
+        <div>
+            <img src="SwipeText.png" width="100" style="float:left;">
+            <p class="pagination">1 of 3</p>
+        </div>
+    </body>
+</html>

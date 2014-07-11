@@ -1,0 +1,128 @@
+/* 
+  Localizable.strings
+  DigicelPNG
+
+  Created by Arundev K S on 21/05/14.
+  Copyright (c) 2014 Marker Studio. All rights reserved.
+*/
+
+
+//  View titles
+
+
+//  Menu items
+
+"LOGIN" = "Sign In";
+
+"LOGOUT" = "Sign Out";
+
+"CLASSIFIEDS" = "Classifieds";
+
+"SEND_STORY" = "Send us a Story";
+
+"FEEDBACK" = "Feedback / Support";
+
+"SHARE_APP" = "Share this app";
+
+"RATE_REVIEW" = "Rate and Review";
+
+//  Alert texts
+
+"SUCCESS" = "Success";
+
+"FAILED" = "Failed";
+
+"CANCEL" = "Cancel";
+
+"DONE" = "Done";
+
+"REGISTRATION_SUCCESS" = "Successfully registered.";
+
+"REGISTRATION_FAILED" = "Failed to register.";
+
+"ENTER_FIRST_NAME" = "Please enter your first name";
+
+"ENTER_LAST_NAME" = "Please enter your last name";
+
+"ENTER_EMAIL_ID" = "Please enter your email address";
+
+"ENTER_VALID_EMAIL_ID" = "Please enter a valid email address";
+
+"ENTER_PASSWORD" = "Please enter your password";
+
+"CONFIRM_PASSWORD" = "Please confirm your password";
+
+"PASSWORD_NOT_MATCHING" = "Password does not match. Please try again.";
+
+"ENTER_EMAIL_PASSWORD" = "Please enter Email and Password";
+
+"LOGIN_FAILED" = "Login Failed";
+
+"SERVER_ERROR" = "Error occured in the server. Please try again.";
+
+"PLEASE_FILL_ALL_FIELDS" = "Please fill all fields";
+
+"PLEASE_ENTER_VALID_FIRST_NAME" = "Please enter a valid first name";
+
+"PLEASE_ENTER_VALID_LAST_NAME" = "Please enter a valid last name";
+
+"SAVE_SUCCESS" = "Successfully saved";
+
+"SAVE_FAIL" = "Failed to save";
+
+"MAIL" = "Mail";
+
+"NO_EMAIL_ACC" = "To use this feature you need to have a mail account setup on your device";
+
+"FEEDBACK_SENT" = "Feedback sent";
+
+"OLD_PASSWORD_INCORRECT" = "Old password you have entered is incorrect";
+
+"NO_VIDEO_SUPPORT" = "This device does not support video recording";
+
+"REQUIRED" = "Required";
+
+"PASSWORD_MUST_MATCH" = "Passwords must match";
+
+"INVALID_EMAIL" = "Invalid Email";
+
+"FORGOT_PASSWORD" = "Forgot Password?";
+
+"ENTER_EMAIL_TO_RESET" = "Please enter your email address";
+
+"CHECK_MAIL" = "Please check your email to complete the reset password process";
+
+"COMMENT_SUBMIT_SUCCESS" = "Thank you for posting your comment";
+
+"DISMISS" = "Dismiss";
+
+"POST_CREATE_SUCCESS" = "Your article has been sent successfully";
+
+"ERROR_DOWNLOADING_PHOTO" = "Error occurred while downloading photo";
+
+"NO_INTERNET" = "The Internet connection appears to be offline.";
+
+//  General texts
+
+"FEED_BACK_SUBJECT" = "Digicel Feedback";
+
+"TAKE_PHOTO" = "Take Photo";
+
+"CHOOSE_FROM_LIBRARY" = "Choose From Library";
+
+"CHECK_OUT_APP" = "Check out this application";
+
+"SEARCH_PLACEHOLDER" = "Search";
+
+"CANCEL" = "Cancel";
+
+"CHOOSE_PHOTO" = "Choose Photo";
+
+"CHOOSE_VIDEO" = "Choose Video";
+
+"CHOOSE_FROM_GALLERY" = "Choose from gallery";
+
+"TAKE_PHOTO" = "Take a new photo";
+
+"TAKE_VIDEO" = "Take a new video";
+

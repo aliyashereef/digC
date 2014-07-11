@@ -1,0 +1,10 @@
+platform :ios, '7.0'
+
+# ignore warnings from a specific pod
+pod 'Facebook-iOS-SDK', :inhibit_warnings => true
+pod 'Bolts', :inhibit_warnings => true
+
+pod 'MBProgressHUD', '~> 0.8'
+pod 'Facebook-iOS-SDK', '~> 3.14.1'
+pod 'Raygun4iOS'
+pod 'AFNetworking', '~> 2.0'

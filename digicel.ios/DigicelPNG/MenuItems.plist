@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>OtherMenu</key>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>Send us a Story</string>
+		</dict>
+	</array>
+	<key>Classifieds</key>
+	<array>
+		<dict>
+			<key>url</key>
+			<string>classifieds/browse-categories/141/jobs/</string>
+			<key>title</key>
+			<string>Job Search</string>
+		</dict>
+		<dict>
+			<key>url</key>
+			<string>classifieds/browse-categories/?category_id=111</string>
+			<key>title</key>
+			<string>Car Sales</string>
+		</dict>
+		<dict>
+			<key>url</key>
+			<string>articles/century21/</string>
+			<key>title</key>
+			<string>Property Search</string>
+		</dict>
+		<dict>
+			<key>url</key>
+			<string>classifieds/browse-categories/101/buy-and-sell/</string>
+			<key>title</key>
+			<string>Buy and Sell</string>
+		</dict>
+		<dict>
+			<key>url</key>
+			<string>hot-deals/</string>
+			<key>title</key>
+			<string>Hot Deals</string>
+		</dict>
+	</array>
+</dict>
+</plist>
