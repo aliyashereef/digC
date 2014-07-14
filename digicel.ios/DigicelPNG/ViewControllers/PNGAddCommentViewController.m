@@ -50,32 +50,27 @@ static int const PostSuccessAlertTag = 101;
 }
 
 - (IBAction)doneButtonTapped:(id)sender {
-    if ([self isValidComment]) {
-        self.navigationController.navigationBar.userInteractionEnabled = NO;
-        [self.commentTextView resignFirstResponder];
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        PNGAddCommentWebService *addCommentWebService = [[PNGAddCommentWebService alloc] init];
-        
-        if (self.parentCommentId) {
-            [addCommentWebService addReply:self.commentTextView.text forCommentId:self.parentCommentId forPostId:self.postId requestSucceeded:^(void) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self showSuccessAlert];
-            } requestFailed:^(NSString *errorMsg) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                self.navigationController.navigationBar.userInteractionEnabled = YES;
-                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
-            }];
-        } else {
-            [addCommentWebService addComment:self.commentTextView.text forPostId:self.postId requestSucceeded:^(void) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self showSuccessAlert];
-            } requestFailed:^(NSString *errorMsg) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                self.navigationController.navigationBar.userInteractionEnabled = YES;
-                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
-            }];
-        }
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd MM yyyy HH mm ss"];
+    NSDate *currentTime = [NSDate date];
+    NSString *currentTimeString= [dateFormat stringFromDate:currentTime];
+    if([[NSUserDefaults standardUserDefaults] valueForKey:kLastCommentTime]){
+        NSString *commentTimestring=[[NSUserDefaults standardUserDefaults] valueForKey: kLastCommentTime];
+        NSDate *commentTime=[dateFormat dateFromString:commentTimestring];
+        NSTimeInterval timeDifference = [currentTime timeIntervalSinceDate:commentTime];
+       if (timeDifference<120){
+            [PNGUtilities showAlertWithTitle:@"SORRY" message:@"wait for some time"];
+        }else{
+            [self addComment];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setValue:currentTimeString forKey:kLastCommentTime];
+            [defaults synchronize];
+        }}
+    else{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setValue:currentTimeString forKey:kLastCommentTime];
+        [defaults synchronize];
+        [self addComment];
     }
 }
 
@@ -105,4 +100,36 @@ static int const PostSuccessAlertTag = 101;
     }
 }
 
+#pragma mark - Function
+-(void)addComment
+{
+    if ([self isValidComment]) {
+        self.navigationController.navigationBar.userInteractionEnabled = NO;
+        [self.commentTextView resignFirstResponder];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        PNGAddCommentWebService *addCommentWebService = [[PNGAddCommentWebService alloc] init];
+        
+        if (self.parentCommentId) {
+            [addCommentWebService addReply:self.commentTextView.text forCommentId:self.parentCommentId forPostId:self.postId requestSucceeded:^(void) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self showSuccessAlert];
+            } requestFailed:^(NSString *errorMsg) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                self.navigationController.navigationBar.userInteractionEnabled = YES;
+                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
+            }];
+        } else {
+            [addCommentWebService addComment:self.commentTextView.text forPostId:self.postId requestSucceeded:^(void) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self showSuccessAlert];
+            } requestFailed:^(NSString *errorMsg) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                self.navigationController.navigationBar.userInteractionEnabled = YES;
+                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
+            }];
+        }
+    }
+
+}
 @end

@@ -11,7 +11,7 @@
 
 
 
-//#define ENVIRONMENT_STAGING   //Please comment out for Production environment
+#define ENVIRONMENT_STAGING   //Please comment out for Production environment
 
 
 #ifdef ENVIRONMENT_STAGING
@@ -197,4 +197,5 @@ typedef enum {
 #define kUserInfo   @"user_info"
 #define kAuthCookie @"cookie"
 
+#define kLastCommentTime @"last_comment_time"
 #endif
