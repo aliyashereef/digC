@@ -12,11 +12,7 @@ static int const PostSuccessAlertTag = 101;
 
 
 @interface PNGAddCommentViewController () <UITextViewDelegate>
-{
-    NSString *currentTimeString;
-    NSDate *currentTime;
-    NSDateFormatter *dateFormat;
-}
+
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *commentErrorLabel;
 @property (weak, nonatomic) IBOutlet UIView *commentView;
@@ -27,10 +23,6 @@ static int const PostSuccessAlertTag = 101;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:DATE_FORMAT];
-    currentTime = [NSDate date];
-    currentTimeString= [dateFormat stringFromDate:currentTime];
     if (self.parentCommentId) {
         self.title = @"Add a Reply";
     }
@@ -59,7 +51,7 @@ static int const PostSuccessAlertTag = 101;
 }
 
 //Method to check whether required time to submit a comment elapsed.
-- (BOOL)presentLastCommentTime{
+- (BOOL)isLastCommentTimeSaved{
     if([[NSUserDefaults standardUserDefaults] valueForKey:kLastCommentTime]){
         return YES;
     }else{
@@ -70,9 +62,9 @@ static int const PostSuccessAlertTag = 101;
 //Method to check whether required time to post a comment elapsed.
 - (BOOL)isTimeToPostComment{
     NSString *commentTimestring=[[NSUserDefaults standardUserDefaults] valueForKey: kLastCommentTime];
-    NSDate *commentTime=[dateFormat dateFromString:commentTimestring];
-    NSTimeInterval timeDifference = [currentTime timeIntervalSinceDate:commentTime];
-    if (timeDifference>CommentInterval){
+    NSDate *commentTime=[PNGUtilities getDateFromDateString:commentTimestring];
+    NSTimeInterval timeDifference = [[NSDate date] timeIntervalSinceDate:commentTime];
+    if (timeDifference>kCommentInterval){
         return YES;
     }else{
         return NO;
@@ -93,7 +85,7 @@ static int const PostSuccessAlertTag = 101;
             [addCommentWebService addReply:self.commentTextView.text forCommentId:self.parentCommentId forPostId:self.postId requestSucceeded:^(void) {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self showSuccessAlert];
-                [self SetLastCommentTime];
+                [self setLastCommentTime];
             } requestFailed:^(NSString *errorMsg) {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 self.navigationController.navigationBar.userInteractionEnabled = YES;
@@ -103,7 +95,7 @@ static int const PostSuccessAlertTag = 101;
             [addCommentWebService addComment:self.commentTextView.text forPostId:self.postId requestSucceeded:^(void) {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self showSuccessAlert];
-                [self SetLastCommentTime];
+                [self setLastCommentTime];
             } requestFailed:^(NSString *errorMsg) {
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 self.navigationController.navigationBar.userInteractionEnabled = YES;
@@ -122,7 +114,8 @@ static int const PostSuccessAlertTag = 101;
 
 //Setting the last comment posting time in the user defaults.
 
-- (void)SetLastCommentTime{
+- (void)setLastCommentTime{
+    NSString *currentTimeString= [PNGUtilities getDateStringFromDate:[NSDate date]];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setValue:currentTimeString forKey:kLastCommentTime];
     [defaults synchronize];
@@ -132,7 +125,7 @@ static int const PostSuccessAlertTag = 101;
 #pragma mark - IB Actions
 
 - (IBAction)doneButtonTapped:(id)sender {
-    if ([self presentLastCommentTime]) {
+    if ([self isLastCommentTimeSaved]) {
         if ([self isTimeToPostComment]) {
             [self addComment];
         }else{

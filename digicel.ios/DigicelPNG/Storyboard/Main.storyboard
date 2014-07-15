@@ -867,6 +867,9 @@
                                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="296" translatesAutoresizingMaskIntoConstraints="NO" id="osh-Zd-3w5" customClass="PNGLatoLabel">
                                                                 <rect key="frame" x="12" y="24" width="296" height="30"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="5Vv-7T-g4p"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                                 <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -884,7 +887,6 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="0kj-c2-LFX" secondAttribute="bottom" constant="12" id="Bfj-CT-Dic"/>
                                                             <constraint firstItem="osh-Zd-3w5" firstAttribute="leading" secondItem="BxX-VR-ecp" secondAttribute="leading" constant="12" id="CUv-zj-vw0"/>
                                                             <constraint firstAttribute="trailing" secondItem="0kj-c2-LFX" secondAttribute="trailing" constant="12" id="HVC-4U-KQL"/>
                                                             <constraint firstItem="0kj-c2-LFX" firstAttribute="leading" secondItem="BxX-VR-ecp" secondAttribute="leading" constant="12" id="JRv-gn-wFe"/>
@@ -1078,6 +1080,7 @@
                         <outlet property="publishDataLabel" destination="0kj-c2-LFX" id="edj-OL-976"/>
                         <outlet property="titleContainerHeight" destination="vOG-RP-j06" id="Il9-Tb-I6r"/>
                         <outlet property="titleLabel" destination="osh-Zd-3w5" id="t3u-7G-e1O"/>
+                        <outlet property="titleLabelHeight" destination="5Vv-7T-g4p" id="thv-Fb-5im"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pIn-mD-3gS" userLabel="First Responder" sceneMemberID="firstResponder"/>

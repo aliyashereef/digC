@@ -8,7 +8,7 @@
 
 #import "PNGArticleViewController.h"
 
-#define kTitleViewPadding       50
+#define kTitleViewPadding       48
 #define kImageViewHeight        200
 
 @interface PNGArticleViewController ()
@@ -88,7 +88,6 @@
     }
     [articleImageView setImageWithURL:[NSURL URLWithString:_article.postImageURL] placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleFeatured]];
     titleLabel.text = _article.title;
-    
     publishDataLabel.text = [NSString stringWithFormat:@"%@    |    %@",_article.authorName,_article.publishedDate];
     contentLabel.text = _article.content;
     int index = (int)[_articles indexOfObject:_article];
@@ -112,6 +111,7 @@
             imageContainerHeight.constant = 0;
     }
 
+   
     NSString *publishData = [NSString stringWithFormat:@"%@    |    %@",_article.authorName,_article.publishedDate];
     
     //  Calculating required height for the title label.
@@ -122,11 +122,14 @@
     CGSize reqSizeOfPublishData =[PNGUtilities getRequiredSizeForText:publishData
                                                             font:[UIFont fontWithName:@"Lato-Bold" size:12]
                                                         maxWidth:publishDataLabel.frame.size.width];
+    //Changing height of title label according to title size.
+    titleLabelHeight.constant=reqSize.height;
+    
     //Changing height of label according to the text size.
     authorDataLabelHeight.constant=reqSizeOfPublishData.height;
     
     //  title label height + publish data label height + padding
-    titleContainerHeight.constant = reqSize.height +
+    titleContainerHeight.constant = titleLabelHeight.constant +
                                     authorDataLabelHeight.constant+
                                     kTitleViewPadding;
 

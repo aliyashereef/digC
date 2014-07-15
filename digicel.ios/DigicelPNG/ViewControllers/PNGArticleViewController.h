@@ -27,6 +27,7 @@
     
     IBOutlet NSLayoutConstraint *imageContainerHeight;
     IBOutlet NSLayoutConstraint *titleContainerHeight;
+    IBOutlet NSLayoutConstraint *titleLabelHeight;
     IBOutlet NSLayoutConstraint *contentContainerHeight;
     IBOutlet NSLayoutConstraint *pageInfoViewHeight;
     IBOutlet NSLayoutConstraint *adsViewHeight;

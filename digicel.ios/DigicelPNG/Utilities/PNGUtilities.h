@@ -49,6 +49,9 @@
 //convert date to string
 + (NSString *)getDateStringFromDate:(NSDate *)date;
 
+//convert string to date
++ (NSDate *)getDateFromDateString:(NSString *)string;
+
 //get data for image file
 + (NSData *)getDataForImage:(UIImage *)image;
 

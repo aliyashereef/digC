@@ -73,7 +73,7 @@
 
 //  Zero value
 #define kZeroValue          0
-#define CommentInterval    120
+#define kCommentInterval    120
 
 typedef enum {
     PNGNews = 187,

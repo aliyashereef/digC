@@ -160,11 +160,18 @@
 //convert date to string
 + (NSString *)getDateStringFromDate:(NSDate *)date {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy-HH:mm:ss"];
+    [formatter setDateFormat:DATE_FORMAT];
     NSString *dateString = [formatter stringFromDate:[NSDate date]];
     return dateString;
 }
 
+//convert string to date
++ (NSDate *)getDateFromDateString:(NSString *)string{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:DATE_FORMAT];
+    NSDate *returnDate =[formatter dateFromString:string];
+    return returnDate;
+}
 //get data for image file
 + (NSData *)getDataForImage:(UIImage *)image {
     NSData *data = UIImageJPEGRepresentation(image, 0.0);
