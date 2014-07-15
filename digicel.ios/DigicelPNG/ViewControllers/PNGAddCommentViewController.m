@@ -50,25 +50,23 @@ static int const PostSuccessAlertTag = 101;
     return isValid;
 }
 
-//Method to check whether required time to submit a comment elapsed.
-- (BOOL)isLastCommentTimeSaved{
-    if([[NSUserDefaults standardUserDefaults] valueForKey:kLastCommentTime]){
-        return YES;
-    }else{
-        return NO;
-    }
-}
 
 //Method to check whether required time to post a comment elapsed.
 - (BOOL)isTimeToPostComment{
+    BOOL isTimeToPostComment = NO;
     NSString *commentTimestring=[[NSUserDefaults standardUserDefaults] valueForKey: kLastCommentTime];
     NSDate *commentTime=[PNGUtilities getDateFromDateString:commentTimestring];
     NSTimeInterval timeDifference = [[NSDate date] timeIntervalSinceDate:commentTime];
-    if (timeDifference>kCommentInterval){
-        return YES;
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:kLastCommentTime]) {
+        if (timeDifference>kCommentInterval){
+            isTimeToPostComment = YES;
+        }else{
+            isTimeToPostComment = NO;
+        }
     }else{
-        return NO;
+        isTimeToPostComment = YES;
     }
+    return isTimeToPostComment;
 }
 
 // To add a comment.
@@ -125,17 +123,12 @@ static int const PostSuccessAlertTag = 101;
 #pragma mark - IB Actions
 
 - (IBAction)doneButtonTapped:(id)sender {
-    if ([self isLastCommentTimeSaved]) {
-        if ([self isTimeToPostComment]) {
+    if ([self isTimeToPostComment]) {
             [self addComment];
-        }else{
-            [PNGUtilities showAlertWithTitle:NSLocalizedString(@"SLOWDOWN_COMMENT_TIME", @"") message:nil];
-        }
     }else{
-        [self addComment];
+        [PNGUtilities showAlertWithTitle:NSLocalizedString(@"SLOWDOWN_COMMENT_TIME", @"") message:nil];
     }
 }
-
 
 #pragma mark - UIAlertview delegate methods
 
