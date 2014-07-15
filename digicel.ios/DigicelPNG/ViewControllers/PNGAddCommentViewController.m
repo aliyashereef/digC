@@ -52,21 +52,20 @@ static int const PostSuccessAlertTag = 101;
 
 
 //Method to check whether required time to post a comment elapsed.
-- (BOOL)isTimeToPostComment{
-    BOOL isTimeToPostComment = NO;
-    NSString *commentTimestring=[[NSUserDefaults standardUserDefaults] valueForKey: kLastCommentTime];
-    NSDate *commentTime=[PNGUtilities getDateFromDateString:commentTimestring];
-    NSTimeInterval timeDifference = [[NSDate date] timeIntervalSinceDate:commentTime];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:kLastCommentTime]) {
-        if (timeDifference>kCommentInterval){
-            isTimeToPostComment = YES;
-        }else{
-            isTimeToPostComment = NO;
+
+- (BOOL)isTimeToPostComment {
+    NSString *commentTimestring=[[NSUserDefaults standardUserDefaults] valueForKey:kLastCommentTime];
+    if(commentTimestring) {
+        NSDate *commentTime = [PNGUtilities getDateFromDateString:commentTimestring];
+        NSTimeInterval timeDifference = [[NSDate date] timeIntervalSinceDate:commentTime];
+        if(timeDifference > kCommentInterval){
+            return YES;
+        } else {
+            return NO;
         }
-    }else{
-        isTimeToPostComment = YES;
+    } else {
+        return YES;
     }
-    return isTimeToPostComment;
 }
 
 // To add a comment.
