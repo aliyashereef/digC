@@ -73,7 +73,7 @@
 
 //  Zero value
 #define kZeroValue          0
-
+#define CommentInterval    120
 
 typedef enum {
     PNGNews = 187,
@@ -175,7 +175,7 @@ typedef enum {
 #define RESULT_STATUS           @"result"
 #define MESSAGE                 @"message"
 #define STATUS                  @"status"
-
+#define DATE_FORMAT             @"dd MM yyyy HH mm ss"
 
 #define ME @"me"
 #define EMAIL_KEY @"email"

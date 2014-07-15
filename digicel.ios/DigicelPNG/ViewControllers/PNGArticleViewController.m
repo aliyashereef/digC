@@ -8,7 +8,7 @@
 
 #import "PNGArticleViewController.h"
 
-#define kTitleViewPadding       72
+#define kTitleViewPadding       50
 #define kImageViewHeight        200
 
 @interface PNGArticleViewController ()
@@ -88,6 +88,7 @@
     }
     [articleImageView setImageWithURL:[NSURL URLWithString:_article.postImageURL] placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleFeatured]];
     titleLabel.text = _article.title;
+    
     publishDataLabel.text = [NSString stringWithFormat:@"%@    |    %@",_article.authorName,_article.publishedDate];
     contentLabel.text = _article.content;
     int index = (int)[_articles indexOfObject:_article];
@@ -111,18 +112,28 @@
             imageContainerHeight.constant = 0;
     }
 
+    NSString *publishData = [NSString stringWithFormat:@"%@    |    %@",_article.authorName,_article.publishedDate];
     
     //  Calculating required height for the title label.
     CGSize reqSize = [PNGUtilities getRequiredSizeForText:_article.title
                                                             font:[UIFont fontWithName:@"Lato-Bold" size:24]
                                                         maxWidth:titleLabel.frame.size.width];
+    // Calculating required height for publish data label.
+    CGSize reqSizeOfPublishData =[PNGUtilities getRequiredSizeForText:publishData
+                                                            font:[UIFont fontWithName:@"Lato-Bold" size:12]
+                                                        maxWidth:publishDataLabel.frame.size.width];
+    //Changing height of label according to the text size.
+    authorDataLabelHeight.constant=reqSizeOfPublishData.height;
+    
     //  title label height + publish data label height + padding
-    titleContainerHeight.constant = reqSize.height + kTitleViewPadding;
+    titleContainerHeight.constant = reqSize.height +
+                                    authorDataLabelHeight.constant+
+                                    kTitleViewPadding;
 
     //  Calculating required height for the content label.
     reqSize = [PNGUtilities getRequiredSizeForText:_article.content
-                                                     font:[UIFont fontWithName:@"Lato-Regular" size:15]
-                                                 maxWidth:contentLabel.frame.size.width];
+                                              font:[UIFont fontWithName:@"Lato-Regular" size:15]
+                                          maxWidth:contentLabel.frame.size.width];
     contentContainerHeight.constant = reqSize.height;
     adsViewHeight.constant = madsAdView.contentSize.height;
     mainViewHeight.constant = imageContainerHeight.constant +

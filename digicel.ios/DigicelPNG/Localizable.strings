@@ -102,6 +102,8 @@
 
 "NO_INTERNET" = "The Internet connection appears to be offline.";
 
+"SLOWDOWN_COMMENT_TIME" = "You are posting comments too quickly; slow down";
+
 //  General texts
 
 "FEED_BACK_SUBJECT" = "Digicel Feedback";

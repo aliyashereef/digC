@@ -31,6 +31,7 @@
     IBOutlet NSLayoutConstraint *pageInfoViewHeight;
     IBOutlet NSLayoutConstraint *adsViewHeight;
     IBOutlet NSLayoutConstraint *mainViewHeight;
+    IBOutlet NSLayoutConstraint *authorDataLabelHeight;
     
     BOOL showCommentsView;
     MadsAdView *madsAdView;

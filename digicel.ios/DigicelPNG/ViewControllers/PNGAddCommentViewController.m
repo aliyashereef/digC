@@ -10,8 +10,13 @@
 
 static int const PostSuccessAlertTag = 101;
 
-@interface PNGAddCommentViewController () <UITextViewDelegate>
 
+@interface PNGAddCommentViewController () <UITextViewDelegate>
+{
+    NSString *currentTimeString;
+    NSDate *currentTime;
+    NSDateFormatter *dateFormat;
+}
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *commentErrorLabel;
 @property (weak, nonatomic) IBOutlet UIView *commentView;
@@ -22,7 +27,10 @@ static int const PostSuccessAlertTag = 101;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:DATE_FORMAT];
+    currentTime = [NSDate date];
+    currentTimeString= [dateFormat stringFromDate:currentTime];
     if (self.parentCommentId) {
         self.title = @"Add a Reply";
     }
@@ -34,6 +42,7 @@ static int const PostSuccessAlertTag = 101;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Methods
 // Method to perform validations for email and password
 - (BOOL)isValidComment {
     BOOL isValid = YES;
@@ -49,37 +58,91 @@ static int const PostSuccessAlertTag = 101;
     return isValid;
 }
 
-- (IBAction)doneButtonTapped:(id)sender {
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"dd MM yyyy HH mm ss"];
-    NSDate *currentTime = [NSDate date];
-    NSString *currentTimeString= [dateFormat stringFromDate:currentTime];
+//Method to check whether required time to submit a comment elapsed.
+- (BOOL)presentLastCommentTime{
     if([[NSUserDefaults standardUserDefaults] valueForKey:kLastCommentTime]){
-        NSString *commentTimestring=[[NSUserDefaults standardUserDefaults] valueForKey: kLastCommentTime];
-        NSDate *commentTime=[dateFormat dateFromString:commentTimestring];
-        NSTimeInterval timeDifference = [currentTime timeIntervalSinceDate:commentTime];
-       if (timeDifference<120){
-            [PNGUtilities showAlertWithTitle:@"SORRY" message:@"wait for some time"];
-        }else{
-            [self addComment];
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setValue:currentTimeString forKey:kLastCommentTime];
-            [defaults synchronize];
-        }}
-    else{
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setValue:currentTimeString forKey:kLastCommentTime];
-        [defaults synchronize];
-        [self addComment];
+        return YES;
+    }else{
+        return NO;
     }
 }
 
+//Method to check whether required time to post a comment elapsed.
+- (BOOL)isTimeToPostComment{
+    NSString *commentTimestring=[[NSUserDefaults standardUserDefaults] valueForKey: kLastCommentTime];
+    NSDate *commentTime=[dateFormat dateFromString:commentTimestring];
+    NSTimeInterval timeDifference = [currentTime timeIntervalSinceDate:commentTime];
+    if (timeDifference>CommentInterval){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+// To add a comment.
+-(void)addComment
+{
+    if ([self isValidComment]) {
+        self.navigationController.navigationBar.userInteractionEnabled = NO;
+        [self.commentTextView resignFirstResponder];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        PNGAddCommentWebService *addCommentWebService = [[PNGAddCommentWebService alloc] init];
+        
+        if (self.parentCommentId) {
+            [addCommentWebService addReply:self.commentTextView.text forCommentId:self.parentCommentId forPostId:self.postId requestSucceeded:^(void) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self showSuccessAlert];
+                [self SetLastCommentTime];
+            } requestFailed:^(NSString *errorMsg) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                self.navigationController.navigationBar.userInteractionEnabled = YES;
+                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
+            }];
+        } else {
+            [addCommentWebService addComment:self.commentTextView.text forPostId:self.postId requestSucceeded:^(void) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self showSuccessAlert];
+                [self SetLastCommentTime];
+            } requestFailed:^(NSString *errorMsg) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                self.navigationController.navigationBar.userInteractionEnabled = YES;
+                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
+            }];
+        }
+    }
+    
+}
 //Add comment succes alert
 - (void)showSuccessAlert {
     UIAlertView *succesAlert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"COMMENT_SUBMIT_SUCCESS", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"DISMISS", @"") otherButtonTitles:nil];
     succesAlert.tag = PostSuccessAlertTag;
     [succesAlert show];
 }
+
+//Setting the last comment posting time in the user defaults.
+
+- (void)SetLastCommentTime{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:currentTimeString forKey:kLastCommentTime];
+    [defaults synchronize];
+}
+
+
+#pragma mark - IB Actions
+
+- (IBAction)doneButtonTapped:(id)sender {
+    if ([self presentLastCommentTime]) {
+        if ([self isTimeToPostComment]) {
+            [self addComment];
+        }else{
+            [PNGUtilities showAlertWithTitle:NSLocalizedString(@"SLOWDOWN_COMMENT_TIME", @"") message:nil];
+        }
+    }else{
+        [self addComment];
+    }
+}
+
 
 #pragma mark - UIAlertview delegate methods
 
@@ -100,36 +163,4 @@ static int const PostSuccessAlertTag = 101;
     }
 }
 
-#pragma mark - Function
--(void)addComment
-{
-    if ([self isValidComment]) {
-        self.navigationController.navigationBar.userInteractionEnabled = NO;
-        [self.commentTextView resignFirstResponder];
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        PNGAddCommentWebService *addCommentWebService = [[PNGAddCommentWebService alloc] init];
-        
-        if (self.parentCommentId) {
-            [addCommentWebService addReply:self.commentTextView.text forCommentId:self.parentCommentId forPostId:self.postId requestSucceeded:^(void) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self showSuccessAlert];
-            } requestFailed:^(NSString *errorMsg) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                self.navigationController.navigationBar.userInteractionEnabled = YES;
-                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
-            }];
-        } else {
-            [addCommentWebService addComment:self.commentTextView.text forPostId:self.postId requestSucceeded:^(void) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self showSuccessAlert];
-            } requestFailed:^(NSString *errorMsg) {
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                self.navigationController.navigationBar.userInteractionEnabled = YES;
-                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
-            }];
-        }
-    }
-
-}
 @end
