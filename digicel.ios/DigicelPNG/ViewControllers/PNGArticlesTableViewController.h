@@ -18,7 +18,10 @@
 
 @interface PNGArticlesTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSArray *articles;
+@property (nonatomic, strong) NSMutableArray *articles;
+@property (nonatomic, strong) NSNumber *category;
+@property (nonatomic, strong) NSString *searchFieldText;
+
 @property (nonatomic, strong) id <ArticlesTableSelectionDelegate> delegate;
 
 @end

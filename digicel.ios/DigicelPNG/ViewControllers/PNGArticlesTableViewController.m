@@ -9,7 +9,10 @@
 #import "PNGArticlesTableViewController.h"
 
 @interface PNGArticlesTableViewController ()
-
+{
+    int indexForLoadMore;
+    BOOL articlesFinished;
+}
 @end
 
 @implementation PNGArticlesTableViewController
@@ -24,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    articlesFinished = NO;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -41,7 +45,7 @@
 
 //  Setter method for articles.
 - (void)setArticles:(NSArray *)articles {
-    _articles = articles;
+    _articles =[[NSMutableArray alloc]initWithArray:articles];
     [self.tableView reloadData];
     if(articles.count > 0) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
@@ -68,6 +72,10 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];
     }
     cell.article = [_articles objectAtIndex:indexPath.row];
+    if(indexPath.row == _articles.count-1 && !articlesFinished) {
+        indexForLoadMore++;
+        [self loadMoreButtonAction:nil];
+    }
     return cell;
 }
 
@@ -79,7 +87,31 @@
     }
 }
 
-
+//Fetching next set of search results from the DB .
+- (void)loadMoreButtonAction:(id)sender {
+    PFQuery *titleQuery = [PNGArticle query];
+    [titleQuery whereKey:@"title" containsString:_searchFieldText.lowercaseString];
+    PFQuery *contentQuery = [PNGArticle query];
+    [contentQuery whereKey:@"content" containsString:_searchFieldText.lowercaseString];
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery,contentQuery]];
+    [query whereKey:@"category" containsAllObjectsInArray:@[_category]];
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
+    [query orderBySortDescriptor:sortDesc];
+    query.limit = 10;
+    query.skip = 10*indexForLoadMore;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [_articles addObjectsFromArray:objects];
+            if (objects.count%10 > 0) {
+                articlesFinished=YES;
+            }
+            [self.tableView reloadData];
+        }
+    }];
+}
+    
 
 /*
 #pragma mark - Navigation

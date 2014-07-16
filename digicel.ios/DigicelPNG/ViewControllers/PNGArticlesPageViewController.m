@@ -280,6 +280,8 @@ typedef enum {
     PNGArticlesViewController *articlesViewController = [self viewControllerAtIndex:currentIndex storyboard:self.storyboard];
     NSDictionary *category = articlesViewController.category;
     NSNumber *categoryId = [NSNumber numberWithInt:[[category valueForKey:@"categoryId"] intValue]];
+    resultsViewController.category = categoryId;
+    resultsViewController.searchFieldText= searchField.text;
     PFQuery *titleQuery = [PNGArticle query];
     [titleQuery whereKey:@"title" containsString:searchField.text.lowercaseString];
     PFQuery *contentQuery = [PNGArticle query];
@@ -288,10 +290,11 @@ typedef enum {
     [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
     NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
     [query orderBySortDescriptor:sortDesc];
+    query.limit=10;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            resultsViewController.articles = objects;
+            resultsViewController.articles =[[NSMutableArray alloc]initWithArray:objects];
             searchResultsContainer.hidden = NO;
             [self changecontainerVisibiityForState:ShowResultsView];
         } else {
