@@ -27,7 +27,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    articlesFinished = NO;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -47,6 +46,9 @@
 - (void)setArticles:(NSArray *)articles {
     _articles =[[NSMutableArray alloc]initWithArray:articles];
     [self.tableView reloadData];
+    if (_articles.count<kNoOfCellInSearchView) {
+        articlesFinished = YES;
+    }
     if(articles.count > 0) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
@@ -72,7 +74,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];
     }
     cell.article = [_articles objectAtIndex:indexPath.row];
-    if(indexPath.row == _articles.count-1 && !articlesFinished) {
+    if(indexPath.row == _articles.count-1 && !articlesFinished ) {
         indexForLoadMore++;
         [self loadMoreButtonAction:nil];
     }
@@ -97,18 +99,23 @@
     [query whereKey:@"category" containsAllObjectsInArray:@[_category]];
     NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
     [query orderBySortDescriptor:sortDesc];
-    query.limit = 10;
-    query.skip = 10*indexForLoadMore;
+    query.limit = kNoOfCellInSearchView;
+    query.skip = kNoOfCellInSearchView*indexForLoadMore;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
+            if (objects.count>0) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [_articles addObjectsFromArray:objects];
-            if (objects.count%10 > 0) {
+            if (_articles.count%10 > 0) {
                 articlesFinished=YES;
             }
             [self.tableView reloadData];
+            }else{
+                articlesFinished=YES;
+            }
         }
+        
     }];
 }
     

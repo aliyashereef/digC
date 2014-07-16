@@ -290,7 +290,7 @@ typedef enum {
     [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
     NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
     [query orderBySortDescriptor:sortDesc];
-    query.limit=10;
+    query.limit=kNoOfCellInSearchView;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
