@@ -32,7 +32,6 @@
     [super viewDidLoad];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -49,9 +48,9 @@
     _articles =[[NSMutableArray alloc]initWithArray:articles];
     if (articles.count<kNoOfCellInSearchView) {
         articlesFinished = YES;
-        [self LoadArticlesWithAd:_articles];
+        [self loadArticlesWithAd:_articles];
     }else{
-        [self LoadArticlesWithAd:_articles];
+        [self loadArticlesWithAd:_articles];
     }
     [self.tableView reloadData];
     if(articles.count > 0) {
@@ -70,7 +69,6 @@
     // Return the number of rows in the section.
     return _allArticles.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
@@ -144,7 +142,7 @@
             if (objects.count>0) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [_articles addObjectsFromArray:objects];
-            [self LoadArticlesWithAd:_articles];
+            [self loadArticlesWithAd:_articles];
             if (_allArticles.count%10 > 0) {
                 articlesFinished=YES;
             }
@@ -155,13 +153,16 @@
         }
     }];
 }
-//Load the fourth cell with a null cell .
-- (void)LoadArticlesWithAd:(NSMutableArray *)array
+
+//Loading the fourth cell with a null cell .
+- (void)loadArticlesWithAd:(NSMutableArray *)array
 {
-    
     NSMutableArray *listType = [[NSMutableArray alloc] initWithArray:array];
     if(listType.count > 0) {
-        for(int i = 1; i <= listType.count; i++) {
+        for(int i = 0; i <= listType.count; i++) {
+            if (i==0) {
+                continue;
+            }
             if (i % 5 == 0) {
                 [listType insertObject:[NSNull null] atIndex:i-1];
             }
@@ -178,7 +179,6 @@
     return madsAdView;
 }
 
-
 #pragma mark - MadsAdViewDelegate
 
 //  Sent after an ad view finished loading ad content.
@@ -190,7 +190,6 @@
 
 //  Sent if an ad view failed to load ad content.
 - (void)didFailToReceiveAd:(id)sender withError:(NSError*)error {
-    
 }
 
 /*
