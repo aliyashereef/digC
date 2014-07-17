@@ -75,7 +75,7 @@
 #define kZeroValue          0
 //  Other constants
 
-#define kNoOfCellInSearchView 10
+#define kNoOfCellInSearchView 20
 #define kCommentInterval    120
 
 typedef enum {

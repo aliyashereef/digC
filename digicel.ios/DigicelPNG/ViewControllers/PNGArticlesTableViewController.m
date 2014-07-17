@@ -82,11 +82,11 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];
         }
         cell.article = article;
+        if(indexPath.row == _allArticles.count-1 && !articlesFinished ) {
+            indexForLoadMore++;
+            [self loadMoreButtonAction:nil];
+        }
         return cell;
-    }
-    if(indexPath.row == _allArticles.count-1 && !articlesFinished ) {
-        indexForLoadMore++;
-        [self loadMoreButtonAction:nil];
     }
     return cell;
 }
@@ -143,7 +143,7 @@
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [_articles addObjectsFromArray:objects];
             [self loadArticlesWithAd:_articles];
-            if (_allArticles.count%10 > 0) {
+            if (_allArticles.count%kNoOfCellInSearchView > 0) {
                 articlesFinished=YES;
             }
             [self.tableView reloadData];
@@ -158,6 +158,7 @@
 - (void)loadArticlesWithAd:(NSMutableArray *)array
 {
     NSMutableArray *listType = [[NSMutableArray alloc] initWithArray:array];
+    _allArticles = [[NSMutableArray alloc]init];
     if(listType.count > 0) {
         for(int i = 0; i <= listType.count; i++) {
             if (i==0) {
