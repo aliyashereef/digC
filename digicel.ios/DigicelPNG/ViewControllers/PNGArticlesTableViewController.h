@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PNGListArticleCell.h"
 #import "PNGArticlePageViewController.h"
+#import "PNGAdsTableViewCell.h"
 
 /*
  Subclass of UITableViewController. Lists an array of list type articles.
@@ -19,7 +20,8 @@
 @interface PNGArticlesTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray *articles;
-@property (nonatomic, strong) NSNumber *category;
+@property (nonatomic, strong) NSMutableArray *allArticles;
+@property (nonatomic, strong) NSDictionary *category;
 @property (nonatomic, strong) NSString *searchFieldText;
 
 @property (nonatomic, strong) id <ArticlesTableSelectionDelegate> delegate;

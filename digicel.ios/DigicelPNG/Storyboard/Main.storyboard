@@ -583,6 +583,14 @@
                                     <outlet property="articleTitleLabel" destination="Hea-rz-31b" id="45K-yJ-WND"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PNGAdsTableViewCell" id="MZo-Do-2dJ" customClass="PNGAdsTableViewCell">
+                                <rect key="frame" x="0.0" y="93" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MZo-Do-2dJ" id="P7E-NW-vzp">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="mLY-KY-lD6" id="ILK-SS-rwB"/>

@@ -8,6 +8,9 @@
 
 #import "PNGArticlesTableViewController.h"
 
+#define kListTypeCellHeight 92
+#define kAdCellHeight       162
+
 @interface PNGArticlesTableViewController ()
 {
     int indexForLoadMore;
@@ -27,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -45,12 +47,15 @@
 //  Setter method for articles.
 - (void)setArticles:(NSArray *)articles {
     _articles =[[NSMutableArray alloc]initWithArray:articles];
-    [self.tableView reloadData];
-    if (_articles.count<kNoOfCellInSearchView) {
+    if (articles.count<kNoOfCellInSearchView) {
         articlesFinished = YES;
+        [self LoadArticlesWithAd:_articles];
+    }else{
+        [self LoadArticlesWithAd:_articles];
     }
+    [self.tableView reloadData];
     if(articles.count > 0) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+       [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
 }
 
@@ -63,40 +68,72 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return _articles.count;
+    return _allArticles.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"PNGListArticleCell";
-    PNGListArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    if(cell == nil) {
+    UITableViewCell *cell;
+    PNGArticle *article = [_allArticles objectAtIndex:indexPath.row];
+    if([article isKindOfClass:[NSNull class]]) {
+        cell = [self loadAdvertCell:tableView cellForRowAtIndexPath:indexPath];
+    } else {
+        static NSString *cellIdentifier = @"PNGListArticleCell";
+        PNGListArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        if(cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];
+        }
+        cell.article = article;
+        return cell;
     }
-    cell.article = [_articles objectAtIndex:indexPath.row];
-    if(indexPath.row == _articles.count-1 && !articlesFinished ) {
+    if(indexPath.row == _allArticles.count-1 && !articlesFinished ) {
         indexForLoadMore++;
         [self loadMoreButtonAction:nil];
     }
     return cell;
 }
 
+- (UITableViewCell *)loadAdvertCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"PNGAdsTableViewCell";
+    PNGAdsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if(!cell.adView) {
+        if(cell.adView == nil) {
+            cell.adView = [self createAdsView];
+            cell.adView.tag = indexPath.row;
+            [cell addSubview:cell.adView];
+        }
+    }
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PNGArticle *article = [_allArticles objectAtIndex:indexPath.row];
+    if([article isKindOfClass:[NSNull class]]) {
+        return kAdCellHeight;
+    }else{
+        return kListTypeCellHeight;
+    }
+}
+
 #pragma mark - TableView Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(_delegate && [_delegate respondsToSelector:@selector(articlesTableSelection:didSelectArticle:)]) {
-        [_delegate articlesTableSelection:self didSelectArticle:[_articles objectAtIndex:indexPath.row]];
+        [_delegate articlesTableSelection:self didSelectArticle:[_allArticles objectAtIndex:indexPath.row]];
     }
 }
 
+#pragma mark - Private Functions
+
 //Fetching next set of search results from the DB .
 - (void)loadMoreButtonAction:(id)sender {
+    NSNumber *categoryId = [NSNumber numberWithInt:[[_category valueForKey:@"categoryId"] intValue]];
     PFQuery *titleQuery = [PNGArticle query];
     [titleQuery whereKey:@"title" containsString:_searchFieldText.lowercaseString];
     PFQuery *contentQuery = [PNGArticle query];
     [contentQuery whereKey:@"content" containsString:_searchFieldText.lowercaseString];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery,contentQuery]];
-    [query whereKey:@"category" containsAllObjectsInArray:@[_category]];
+    [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
     NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
     [query orderBySortDescriptor:sortDesc];
     query.limit = kNoOfCellInSearchView;
@@ -107,7 +144,8 @@
             if (objects.count>0) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [_articles addObjectsFromArray:objects];
-            if (_articles.count%10 > 0) {
+            [self LoadArticlesWithAd:_articles];
+            if (_allArticles.count%10 > 0) {
                 articlesFinished=YES;
             }
             [self.tableView reloadData];
@@ -115,10 +153,45 @@
                 articlesFinished=YES;
             }
         }
-        
     }];
 }
+//Load the fourth cell with a null cell .
+- (void)LoadArticlesWithAd:(NSMutableArray *)array
+{
     
+    NSMutableArray *listType = [[NSMutableArray alloc] initWithArray:array];
+    if(listType.count > 0) {
+        for(int i = 1; i <= listType.count; i++) {
+            if (i % 5 == 0) {
+                [listType insertObject:[NSNull null] atIndex:i-1];
+            }
+        }
+        [_allArticles addObjectsFromArray:listType];
+    }
+}
+
+//  Creates an inline mads view.
+- (MadsAdView *)createAdsView {
+    NSString *adsZone = [_category valueForKey:@"ad_id_bottom"];
+    MadsAdView *madsAdView = [[MadsAdView alloc] initWithFrame:CGRectMake(0.0, 6.0, 320, 150.0) zone:adsZone  secret:kMadsInlineAdSecret delegate:nil];
+    madsAdView.madsAdType = MadsAdTypeInline;
+    return madsAdView;
+}
+
+
+#pragma mark - MadsAdViewDelegate
+
+//  Sent after an ad view finished loading ad content.
+//  The ad will display immediately after this signal.
+- (void)didReceiveAd:(id)sender {
+    MadsAdView *adView = (MadsAdView *)sender;
+    NSLog(@"tag : %ld",(long)adView.tag);
+}
+
+//  Sent if an ad view failed to load ad content.
+- (void)didFailToReceiveAd:(id)sender withError:(NSError*)error {
+    
+}
 
 /*
 #pragma mark - Navigation

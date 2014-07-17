@@ -24,10 +24,10 @@
     [MadsAdServer startWithLocationEnabled:YES withLocationPurpose:nil withLocationUpdateTimeInterval:30.0];
     [self initialiseParse:launchOptions];
     [PFFacebookUtils initializeFacebook];
-    [GAManager startTracking];
+    //[GAManager startTracking];
     
     // Raygun configuration
-    [Raygun sharedReporterWithApiKey:RAYGUN_API_KEY];
+    //[Raygun sharedReporterWithApiKey:RAYGUN_API_KEY];
     
     // Setting custom font (Lato) for nav bar titles and buttons throughout the app
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Lato-Bold" size:16.0f], NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil]];
