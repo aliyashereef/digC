@@ -123,7 +123,7 @@
                                                             font:[UIFont fontWithName:@"Lato-Bold" size:12]
                                                         maxWidth:publishDataLabel.frame.size.width];
     //Changing height of title label according to title size.
-    titleLabelHeight.constant=reqSize.height;
+    titleLabelHeight.constant=reqSize.height+2;
     
     //Changing height of label according to the text size.
     authorDataLabelHeight.constant=reqSizeOfPublishData.height;
