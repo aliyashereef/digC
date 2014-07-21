@@ -49,11 +49,10 @@
     indexForLoadMore=0;
     if (articles.count<kNoOfCellInSearchView) {
         articlesFinished = YES;
-        }else{
+    }else{
         articlesFinished = NO;
     }
     [self loadArticlesWithAd:_articles];
-    [self.tableView reloadData];
     if(articles.count > 0) {
        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     }
@@ -80,7 +79,7 @@
         static NSString *cellIdentifier = @"PNGListArticleCell";
         PNGListArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
         if(cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];
         }
         cell.article = article;
         if(indexPath.row == _allArticles.count-1 && !articlesFinished ) {
@@ -91,7 +90,7 @@
     }
     return cell;
 }
-
+// Return the ad cell.
 - (UITableViewCell *)loadAdvertCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"PNGAdsTableViewCell";
     PNGAdsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -140,14 +139,13 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            if (objects.count>0) {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [_articles addObjectsFromArray:objects];
-            [self loadArticlesWithAd:_articles];
-            if (_allArticles.count%kNoOfCellInSearchView > 0) {
-                articlesFinished=YES;
-            }
-            [self.tableView reloadData];
+            if (objects.count>0) {
+                [_articles addObjectsFromArray:objects];
+                [self loadArticlesWithAd:_articles];
+                if (_articles.count%kNoOfCellInSearchView > 0) {
+                    articlesFinished=YES;
+                }
             }else{
                 articlesFinished=YES;
             }
@@ -171,6 +169,7 @@
         }
         [_allArticles addObjectsFromArray:listType];
     }
+    [self.tableView reloadData];
 }
 
 //  Creates an inline mads view.
