@@ -281,7 +281,6 @@ typedef enum {
     NSDictionary *category = articlesViewController.category;
     NSNumber *categoryId = [NSNumber numberWithInt:[[category valueForKey:@"categoryId"] intValue]];
     resultsViewController.category = category;
-    resultsViewController.allArticles=[[NSMutableArray alloc]init];
     resultsViewController.searchFieldText= searchField.text;
     PFQuery *titleQuery = [PNGArticle query];
     [titleQuery whereKey:@"title" containsString:searchField.text.lowercaseString];

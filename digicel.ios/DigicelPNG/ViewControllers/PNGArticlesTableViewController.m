@@ -46,12 +46,13 @@
 //  Setter method for articles.
 - (void)setArticles:(NSArray *)articles {
     _articles =[[NSMutableArray alloc]initWithArray:articles];
+    indexForLoadMore=0;
     if (articles.count<kNoOfCellInSearchView) {
         articlesFinished = YES;
-        [self loadArticlesWithAd:_articles];
-    }else{
-        [self loadArticlesWithAd:_articles];
+        }else{
+        articlesFinished = NO;
     }
+    [self loadArticlesWithAd:_articles];
     [self.tableView reloadData];
     if(articles.count > 0) {
        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
