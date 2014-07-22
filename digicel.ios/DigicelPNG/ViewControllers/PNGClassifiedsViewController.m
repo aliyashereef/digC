@@ -30,7 +30,12 @@
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:PNGStoryboardImageNavigationLogo]];
     NSURL *url;
     if(self.url) {
-        NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseUrl,self.url];
+        NSString *urlString;
+        if ([self.url hasPrefix:@"https://"]) {
+            urlString = [NSString stringWithFormat:@"%@",self.url];
+        }else{
+            urlString = [NSString stringWithFormat:@"%@%@",kBaseUrl,self.url];
+        }
         url = [NSURL URLWithString:[self addHeaderRenderKey:urlString]];
     } else {
         NSString *urlString = [NSString stringWithFormat:@"%@my-classifieds/?cookie=%@&%@",kBaseUrl,[[NSUserDefaults standardUserDefaults] valueForKey:kAuthCookie],kRenderKey];

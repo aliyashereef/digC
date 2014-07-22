@@ -373,6 +373,13 @@ typedef enum {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kITunesLink]];
 }
 
+// Open the web View to do top-up.
+- (void)topUpNow{
+    NSString *urlAddress = @"https://online-top-up.digicelgroup.com/en-PG/";
+    selectedClassifiedsUrl =urlAddress;
+    [self performSegueWithIdentifier:PNGStoryboardViewControllerClassifieds sender:self];
+}
+
 //  Creating four types of navigation bar buttons, logo view and navigation bar textfield.
 - (void)createBarButtonItems {
     menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavMenuIcon"]
@@ -561,12 +568,15 @@ typedef enum {
             [self sendStory];
             break;
         case 1:
-            [self sendFeedback];
+            [self topUpNow];
             break;
         case 2:
-            [self shareApplication];
+            [self sendFeedback];
             break;
         case 3:
+            [self shareApplication];
+            break;
+        case 4:
             [self rateOrReviewApp];
             break;
             
