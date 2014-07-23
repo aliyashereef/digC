@@ -37,7 +37,8 @@
     articlesArray = [[NSMutableArray alloc] init];
     [self fetchCategoryArticles];
     [self addCategoryView];
-//    [self addOverlayAd];
+    [self addOverlayAd];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -232,8 +233,8 @@
 
 //  Adding overlay ads in view
 - (void)addOverlayAd {
-    //    NSString *adsZone = [_category valueForKey:@"ad_id_bottom"];
-    MadsAdView *madsAdView = [[MadsAdView alloc] initWithFrame:CGRectZero zone:@"6435437325" secret:kMadsInlineAdSecret delegate:self];
+    NSString *adsZone = [_category valueForKey:@"ad_id_overlay"];
+    MadsAdView *madsAdView = [[MadsAdView alloc] initWithFrame:CGRectZero zone:adsZone secret:kMadsInlineAdSecret delegate:self];
     madsAdView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     madsAdView.madsAdType = MadsAdTypeOverlay;
     madsAdView.updateTimeInterval = 300;
