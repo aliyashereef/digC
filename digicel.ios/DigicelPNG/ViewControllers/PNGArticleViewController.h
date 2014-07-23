@@ -13,8 +13,9 @@
 #import "PNGSignInEmailViewController.h"
 #import "PNGAddCommentViewController.h"
 #import <MadsSDK/MadsSDK.h>
+#import "GAITrackedViewController.h"
 
-@interface PNGArticleViewController : UIViewController <MadsAdViewDelegate> {
+@interface PNGArticleViewController : GAITrackedViewController <MadsAdViewDelegate> {
     
     IBOutlet UIImageView *articleImageView;
     IBOutlet PNGLatoLabel *titleLabel;

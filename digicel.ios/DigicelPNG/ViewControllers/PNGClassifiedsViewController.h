@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface PNGClassifiedsViewController : UIViewController <UIWebViewDelegate>
+@interface PNGClassifiedsViewController : GAITrackedViewController <UIWebViewDelegate>
 
 @property (nonatomic, strong) NSString *url;
 

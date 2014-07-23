@@ -32,7 +32,7 @@
 
 
 //Google Analytics
-#define GA_TRACKING_ID @"UA-51195592-1" //Test account
+#define GA_TRACKING_ID @"UA-53115675-1" //Test account
 
 //  MADS ad keys
 #define kMadsInlineAdZone @"1435905558"

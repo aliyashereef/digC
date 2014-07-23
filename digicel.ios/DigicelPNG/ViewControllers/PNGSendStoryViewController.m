@@ -46,6 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"Send Story";
     [self initialiseViewParameters];
 }
 

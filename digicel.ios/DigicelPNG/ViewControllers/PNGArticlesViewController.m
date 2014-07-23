@@ -32,6 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"Articles View";
     articlesFinished = NO;
     allArticles = [[NSMutableArray alloc] init];
     articlesArray = [[NSMutableArray alloc] init];

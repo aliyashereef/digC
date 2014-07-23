@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.screenName = @"Classifieds";
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:PNGStoryboardImageNavigationLogo]];
     NSURL *url;
     if(self.url) {

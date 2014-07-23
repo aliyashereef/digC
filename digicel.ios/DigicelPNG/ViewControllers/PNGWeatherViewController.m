@@ -25,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.screenName = @"Weather";
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:PNGStoryboardImageNavigationLogo]];
     
     NSURL *url = [NSURL URLWithString:@"http://www.weather-new-zealand.com/Auckland/"];

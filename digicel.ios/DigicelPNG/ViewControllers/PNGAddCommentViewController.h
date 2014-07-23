@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PNGAddCommentWebService.h"
+#import "GAITrackedViewController.h"
 
 @interface PNGAddCommentViewController : UIViewController<UIAlertViewDelegate>
 

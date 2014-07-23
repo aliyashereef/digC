@@ -41,6 +41,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"Articles Page";
     currentIndex = 0;
     [self getCategoriesArray];
     [self createBarButtonItems];

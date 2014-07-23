@@ -14,6 +14,7 @@
 #import "PNGSubCategoryViewController.h"
 #import "PNGAdsTableViewCell.h"
 #import "PNGLoadMoreCell.h"
+#import "GAITrackedViewController.h"
 
 /*
  View controller which lists all the articles of a category. Need to set category object to this
@@ -21,7 +22,7 @@
  */
 
 #pragma mark - Probably need to use a CollectionView for this screen
-@interface PNGArticlesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ADPullToRefreshViewDelegate> {
+@interface PNGArticlesViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, ADPullToRefreshViewDelegate> {
 
 //    NSMutableDictionary *articles;
     NSMutableArray *allArticles;    //  list articles to pass to the article detail view.

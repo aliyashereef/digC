@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PNGSubCategoryCell.h"
+#import "GAITrackedViewController.h"
 
 /*
  Subclass of UIViewController. Lists all the available subcategories of a category item.
@@ -15,7 +16,7 @@
  to the parent viewcontroller via NSNotification.
  */
 
-@interface PNGSubCategoryViewController : UIViewController <UITableViewDataSource,UITableViewDelegate> {
+@interface PNGSubCategoryViewController : GAITrackedViewController <UITableViewDataSource,UITableViewDelegate> {
     
     IBOutlet UITableView *subCategoryTable;
     IBOutlet NSLayoutConstraint *tableHeight;
