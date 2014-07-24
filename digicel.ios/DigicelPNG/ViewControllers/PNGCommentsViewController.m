@@ -60,7 +60,7 @@ static int const LoadMoreButtonSection = 1;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.screenName = @"Comments";
     contentArray = [[NSMutableArray alloc] init];       // Array to hold comments & replies.
     commentsArray = [[NSMutableArray alloc] init];
     expandedCommentsArray = [[NSMutableArray alloc] init];
