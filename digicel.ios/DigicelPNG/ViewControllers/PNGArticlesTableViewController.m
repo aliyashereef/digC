@@ -128,8 +128,12 @@
     NSNumber *categoryId = [NSNumber numberWithInt:[[_category valueForKey:@"categoryId"] intValue]];
     PFQuery *titleQuery = [PNGArticle query];
     [titleQuery whereKey:@"title" containsString:_searchFieldText.lowercaseString];
+    [titleQuery whereKey:@"title" containsString:_searchFieldText.uppercaseString];
+    [titleQuery whereKey:@"title" containsString:_searchFieldText.capitalizedString];
     PFQuery *contentQuery = [PNGArticle query];
     [contentQuery whereKey:@"content" containsString:_searchFieldText.lowercaseString];
+    [contentQuery whereKey:@"content" containsString:_searchFieldText.capitalizedString];
+    [contentQuery whereKey:@"content" containsString:_searchFieldText.uppercaseString];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery,contentQuery]];
     [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
     NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
