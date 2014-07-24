@@ -234,8 +234,7 @@
 
 //  Adding overlay ads in view
 - (void)addOverlayAd {
-    NSString *adsZone = [_category valueForKey:@"ad_id_overlay"];
-    MadsAdView *madsAdView = [[MadsAdView alloc] initWithFrame:CGRectZero zone:adsZone secret:kMadsInlineAdSecret delegate:self];
+    MadsAdView *madsAdView = [[MadsAdView alloc] initWithFrame:CGRectZero zone:@"0435490871" secret:kMadsInlineAdSecret delegate:self];
     madsAdView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     madsAdView.madsAdType = MadsAdTypeOverlay;
     madsAdView.updateTimeInterval = 300;
