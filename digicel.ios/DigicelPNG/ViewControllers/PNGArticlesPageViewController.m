@@ -285,8 +285,12 @@ typedef enum {
     resultsViewController.searchFieldText= searchField.text;
     PFQuery *titleQuery = [PNGArticle query];
     [titleQuery whereKey:@"title" containsString:searchField.text.lowercaseString];
+    [titleQuery whereKey:@"title" containsString:searchField.text.capitalizedString];
+    [titleQuery whereKey:@"title" containsString:searchField.text.uppercaseString];
     PFQuery *contentQuery = [PNGArticle query];
     [contentQuery whereKey:@"content" containsString:searchField.text.lowercaseString];
+    [contentQuery whereKey:@"content" containsString:searchField.text.capitalizedString];
+    [contentQuery whereKey:@"content" containsString:searchField.text.uppercaseString];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery,contentQuery]];
     [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
     NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
