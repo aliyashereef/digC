@@ -30,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.screenName = @"Sign In";
     // Do any additional setup after loading the view.
 }
 

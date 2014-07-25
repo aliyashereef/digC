@@ -24,7 +24,7 @@
     [MadsAdServer startWithLocationEnabled:YES withLocationPurpose:nil withLocationUpdateTimeInterval:30.0];
     [self initialiseParse:launchOptions];
     [PFFacebookUtils initializeFacebook];
-    //[GAManager startTracking];
+    [GAManager startTracking];
     
     // Raygun configuration
     //[Raygun sharedReporterWithApiKey:RAYGUN_API_KEY];

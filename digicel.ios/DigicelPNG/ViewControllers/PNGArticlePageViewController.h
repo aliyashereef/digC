@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PNGArticle.h"
+#import "GAITrackedViewController.h"
 
-@interface PNGArticlePageViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate> {
+@interface PNGArticlePageViewController : GAITrackedViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate> {
     
     NSInteger currentIndex;
     NSInteger nextIndex;

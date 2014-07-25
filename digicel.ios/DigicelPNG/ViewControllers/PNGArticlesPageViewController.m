@@ -41,6 +41,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"Articles Page";
     currentIndex = 0;
     [self getCategoriesArray];
     [self createBarButtonItems];
@@ -282,10 +283,8 @@ typedef enum {
     NSNumber *categoryId = [NSNumber numberWithInt:[[category valueForKey:@"categoryId"] intValue]];
     resultsViewController.category = category;
     resultsViewController.searchFieldText= searchField.text;
-    PFQuery *titleQuery = [PNGArticle query];
-    [titleQuery whereKey:@"title" containsString:searchField.text.lowercaseString];
-    PFQuery *contentQuery = [PNGArticle query];
-    [contentQuery whereKey:@"content" containsString:searchField.text.lowercaseString];
+    PFQuery *titleQuery = [PFQuery orQueryWithSubqueries:[self createSubQueries:@"title"]];
+    PFQuery *contentQuery = [PFQuery orQueryWithSubqueries:[self createSubQueries:@"content"]];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery,contentQuery]];
     [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
     NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
@@ -380,6 +379,17 @@ typedef enum {
     [self performSegueWithIdentifier:PNGStoryboardViewControllerClassifieds sender:self];
 }
 
+//Creating subqueries for the search title and content query .
+- (NSArray *)createSubQueries:(NSString *)string {
+    PFQuery *upperCaseQuery = [PNGArticle query];
+    PFQuery *lowerCaseQuery = [PNGArticle query];
+    PFQuery *capitalisedCaseQuery = [PNGArticle query];
+    [upperCaseQuery whereKey:string containsString:searchField.text.uppercaseString];
+    [lowerCaseQuery whereKey:string containsString:searchField.text.lowercaseString];
+    [capitalisedCaseQuery whereKey:string containsString:searchField.text.capitalizedString];
+    NSArray *queryArray = @[upperCaseQuery,lowerCaseQuery,capitalisedCaseQuery];
+    return queryArray;
+}
 //  Creating four types of navigation bar buttons, logo view and navigation bar textfield.
 - (void)createBarButtonItems {
     menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavMenuIcon"]

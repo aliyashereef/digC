@@ -16,6 +16,7 @@
 #import "PNGSendStoryViewController.h"
 #import "PNGLatoTextField.h"
 #import "PNGArticlesTableViewController.h"
+#import "GAITrackedViewController.h"
 
 /*
  Home view of the application. Page view controller which listing articles of different categories.
@@ -23,7 +24,7 @@
  articles of the first category.
  */
 
-@interface PNGArticlesPageViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate,ArticlesTableSelectionDelegate, UIScrollViewDelegate> {
+@interface PNGArticlesPageViewController : GAITrackedViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, MFMailComposeViewControllerDelegate, UITextFieldDelegate,ArticlesTableSelectionDelegate, UIScrollViewDelegate> {
     
     IBOutlet UIView *mainView;
     IBOutlet UIView *menuContainer;

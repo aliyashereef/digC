@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PNGCommentCell.h"
 #import "PNGCommentReplyCell.h"
+#import "GAITrackedViewController.h"
 
-@interface PNGCommentsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, PNGCommentCellDelegate>
+@interface PNGCommentsViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, PNGCommentCellDelegate>
 
 @property (nonatomic, strong) NSString *postId;
 

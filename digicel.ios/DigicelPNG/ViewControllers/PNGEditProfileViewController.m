@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.screenName = @"Edit Profile";
     // calls the method to poulate user data
     [self populateViewWithUserData];
 }

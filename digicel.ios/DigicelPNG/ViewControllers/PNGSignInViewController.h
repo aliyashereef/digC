@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface PNGSignInViewController : UIViewController
+@interface PNGSignInViewController : GAITrackedViewController
 
 @end

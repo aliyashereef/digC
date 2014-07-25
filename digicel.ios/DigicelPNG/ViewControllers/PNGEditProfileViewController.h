@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PNGEditProfileWebservice.h"
+#import "GAITrackedViewController.h"
 
-@interface PNGEditProfileViewController : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface PNGEditProfileViewController : GAITrackedViewController<UITextFieldDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     
     IBOutlet UILabel *firstNameErrorLabel;
     IBOutlet UILabel *lastNameErrorLabel;

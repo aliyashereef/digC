@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PNGAddCommentWebService.h"
+#import "GAITrackedViewController.h"
 
-@interface PNGAddCommentViewController : UIViewController<UIAlertViewDelegate>
+@interface PNGAddCommentViewController : GAITrackedViewController<UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSString *postId;
 @property (nonatomic, strong) NSString *parentCommentId;

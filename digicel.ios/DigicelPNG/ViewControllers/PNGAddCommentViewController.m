@@ -23,6 +23,7 @@ static int const PostSuccessAlertTag = 101;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"Add comment";
     if (self.parentCommentId) {
         self.title = @"Add a Reply";
     }

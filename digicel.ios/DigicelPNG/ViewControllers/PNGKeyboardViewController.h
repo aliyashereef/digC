@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
 @protocol PNGKeyboardDelegate <NSObject>
 
@@ -15,7 +16,7 @@
 
 @end
 
-@interface PNGKeyboardViewController : UIViewController <PNGKeyboardDelegate>
+@interface PNGKeyboardViewController : GAITrackedViewController <PNGKeyboardDelegate>
 
 @property (nonatomic, strong) NSArray *keyboardConstraints;
 

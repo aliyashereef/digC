@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PNGUser.h"
+#import "GAITrackedViewController.h"
 
-@interface PNGProfileViewController : UIViewController {
+@interface PNGProfileViewController : GAITrackedViewController {
     
     
 }
