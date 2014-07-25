@@ -126,14 +126,8 @@
 //Fetching next set of search results from the DB .
 - (void)loadMoreButtonAction:(id)sender {
     NSNumber *categoryId = [NSNumber numberWithInt:[[_category valueForKey:@"categoryId"] intValue]];
-    PFQuery *titleQuery = [PNGArticle query];
-    [titleQuery whereKey:@"title" containsString:_searchFieldText.lowercaseString];
-    [titleQuery whereKey:@"title" containsString:_searchFieldText.uppercaseString];
-    [titleQuery whereKey:@"title" containsString:_searchFieldText.capitalizedString];
-    PFQuery *contentQuery = [PNGArticle query];
-    [contentQuery whereKey:@"content" containsString:_searchFieldText.lowercaseString];
-    [contentQuery whereKey:@"content" containsString:_searchFieldText.capitalizedString];
-    [contentQuery whereKey:@"content" containsString:_searchFieldText.uppercaseString];
+    PFQuery *titleQuery = [PFQuery orQueryWithSubqueries:[self createSubQueries:@"title"]];
+    PFQuery *contentQuery = [PFQuery orQueryWithSubqueries:[self createSubQueries:@"content"]];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery,contentQuery]];
     [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
     NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
@@ -182,6 +176,19 @@
     MadsAdView *madsAdView = [[MadsAdView alloc] initWithFrame:CGRectMake(0.0, 6.0, 320, 150.0) zone:adsZone  secret:kMadsInlineAdSecret delegate:nil];
     madsAdView.madsAdType = MadsAdTypeInline;
     return madsAdView;
+}
+
+//Creating subqueries for the search title and content query .
+
+- (NSArray *)createSubQueries:(NSString *)string {
+    PFQuery *upperCaseQuery = [PNGArticle query];
+    PFQuery *lowerCaseQuery = [PNGArticle query];
+    PFQuery *capitalisedCaseQuery = [PNGArticle query];
+    [upperCaseQuery whereKey:string containsString:_searchFieldText.uppercaseString];
+    [lowerCaseQuery whereKey:string containsString:_searchFieldText.lowercaseString];
+    [capitalisedCaseQuery whereKey:string containsString:_searchFieldText.capitalizedString];
+    NSArray *queryArray = @[upperCaseQuery,lowerCaseQuery,capitalisedCaseQuery];
+    return queryArray;
 }
 
 #pragma mark - MadsAdViewDelegate
