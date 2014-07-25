@@ -50,7 +50,6 @@ static int const PostSuccessAlertTag = 101;
     return isValid;
 }
 
-
 //Method to check whether required time to post a comment elapsed.
 
 - (BOOL)isTimeToPostComment {

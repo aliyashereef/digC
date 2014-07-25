@@ -17,5 +17,4 @@
 
 @property (nonatomic, strong) PNGUser *loggedInUser;
 @property (strong, nonatomic) FBSession *session;
-
 @end
