@@ -65,6 +65,8 @@
 		22DA07AB1981277500E7F061 /* PNGAddCommentWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DDD11F1952FF620019CAFE /* PNGAddCommentWebService.m */; };
 		22DBE30B19822902007417CD /* PNGLoginWebservice.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCD0DEF195041B900A08051 /* PNGLoginWebservice.m */; };
 		22DBE30C19822C40007417CD /* PNGRegistrationWebservice.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCD0DEC195041B000A08051 /* PNGRegistrationWebservice.m */; };
+		22DBE30E19824FA2007417CD /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F05C88192DAD4D0064E15C /* libGoogleAnalyticsServices.a */; };
+		22DBE30F19824FBB007417CD /* GAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2253C3DD192CC6BA000B215A /* GAManager.m */; };
 		22DDD1201952FF620019CAFE /* PNGAddCommentWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DDD11F1952FF620019CAFE /* PNGAddCommentWebService.m */; };
 		22DF68F6192A0ED600BD2A8C /* PNGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DF68F5192A0ED600BD2A8C /* PNGUser.m */; };
 		22F05C89192DAD4D0064E15C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F05C88192DAD4D0064E15C /* libGoogleAnalyticsServices.a */; };
@@ -472,6 +474,7 @@
 				22DA07981980ECB100E7F061 /* MadsSDK.framework in Frameworks */,
 				22DA07A21980ECE600E7F061 /* QuartzCore.framework in Frameworks */,
 				22DA079A1980ECCE00E7F061 /* EventKit.framework in Frameworks */,
+				22DBE30E19824FA2007417CD /* libGoogleAnalyticsServices.a in Frameworks */,
 				34A186F51926B40C006EC05F /* XCTest.framework in Frameworks */,
 				34A186F71926B40C006EC05F /* UIKit.framework in Frameworks */,
 				22DA079B1980ECD100E7F061 /* CoreTelephony.framework in Frameworks */,
@@ -1359,6 +1362,7 @@
 				22DA07A71980FBBC00E7F061 /* PNGCategory.m in Sources */,
 				22DA07911980E80000E7F061 /* ADPullToRefreshView.m in Sources */,
 				22DA077E1980D83600E7F061 /* PNGUser.m in Sources */,
+				22DBE30F19824FBB007417CD /* GAManager.m in Sources */,
 				22DA07A81980FBCD00E7F061 /* PNGComment.m in Sources */,
 				22FB3160197E56F50029F487 /* PNGLoginAPITestCase.m in Sources */,
 				22DA07871980E65A00E7F061 /* PNGArticlesViewController.m in Sources */,
@@ -1608,6 +1612,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "DigicelPNGTests/DigicelPNGTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DigicelPNG/Libraries/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "PNG Loop";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1629,6 +1637,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DigicelPNG/DigicelPNG-Prefix.pch";
 				INFOPLIST_FILE = "DigicelPNGTests/DigicelPNGTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DigicelPNG/Libraries/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "PNG Loop";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
