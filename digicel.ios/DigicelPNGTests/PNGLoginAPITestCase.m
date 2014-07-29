@@ -65,6 +65,7 @@
         isDone = YES;
     }requestFailed:^(NSString *errorMsg){
         
+        XCTAssertNotNil(errorMsg, @"error message is not nil");
         isDone = YES;
     }];
     XCTAssertTrue([self waitFor:&isDone timeout:30],
