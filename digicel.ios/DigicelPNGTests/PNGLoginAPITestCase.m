@@ -61,12 +61,10 @@
     
     [logIn userLogin:email password:password requestSucceeded:^(PNGUser *user){
         
-        XCTAssertNotNil(user, @"user is not nil");
-        XCTAssert([user isKindOfClass:[PNGUser class]], @"user is of PNGUser class");
+        XCTFail(@"Invalid user");
         isDone = YES;
     }requestFailed:^(NSString *errorMsg){
         
-        XCTFail(@"%@",errorMsg);
         isDone = YES;
     }];
     XCTAssertTrue([self waitFor:&isDone timeout:30],
