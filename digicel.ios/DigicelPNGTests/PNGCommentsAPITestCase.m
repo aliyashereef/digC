@@ -8,11 +8,6 @@
 
 #import <XCTest/XCTest.h>
 #import <Parse/Parse.h>
-#import "PNGArticle.h"
-#import "PNGCategory.h"
-#import "PNGStory.h"
-#import "PNGFile.h"
-#import "PNGComment.h"
 #import "PNGAddCommentWebService.h"
 
 
@@ -25,6 +20,7 @@
 - (void)setUp
 {
     [super setUp];
+    [self initialiseParse];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -38,7 +34,7 @@
 
 - (void)testFetchComments
 {
-    [self initialiseParse];
+    
     __block BOOL isDone         = NO;
     PFQuery *query              = [self queryForComments:@"69739"];
     query.limit                 = 10;
@@ -64,7 +60,7 @@
 }
 
 - (void)testFetchCommentsCount {
-    [self initialiseParse];
+    
     __block BOOL isDone     = NO;
     PFQuery *query          = [self queryForComments:@"69739"];
     
@@ -129,10 +125,12 @@
 
 #pragma mark - Post
 
-- (void)testAddComment {
+- (void)testAddValidComment {
     
      __block BOOL isDone    = NO;
-    NSString *comment       = @"test comment";
+    
+    int randomNumber        = arc4random() % 500;
+    NSString *comment       = [NSString stringWithFormat:@"%d", randomNumber];
     NSString *postId        = @"93088";
     
     [[NSUserDefaults standardUserDefaults] setValue:@"arundev.s@marker.co.nz|1407404566|d8a3cdbba842099e391fbd3f5cd0a2be" forKey:kAuthCookie];
@@ -145,6 +143,7 @@
         
     } requestFailed:^(NSString *errorMsg) {
         
+        XCTFail(@"%@",errorMsg);
         isDone = YES;
     }];
     
@@ -152,10 +151,38 @@
                   @"Timed out waiting for response asynch method completion");
 }
 
-- (void)testAddReply{
+- (void)testAddInvalidComment {
+    
+    __block BOOL isDone    = NO;
+    
+    NSString *comment       = @"test comment";
+    NSString *postId        = @"93088";
+    
+    [[NSUserDefaults standardUserDefaults] setValue:@"arundev.s@marker.co.nz|1407404566|d8a3cdbba842099e391fbd3f5cd0a2be" forKey:kAuthCookie];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    PNGAddCommentWebService *addCommentWebservice = [[PNGAddCommentWebService alloc] init];
+    [addCommentWebservice addComment:comment forPostId:postId requestSucceeded:^{
+        
+        XCTFail(@"Invalid Command");
+        isDone = YES;
+        
+    } requestFailed:^(NSString *errorMsg) {
+        
+        XCTAssertNotNil(errorMsg, @"error message is not nil");
+        isDone = YES;
+    }];
+    
+    XCTAssertTrue([self waitFor:&isDone timeout:10],
+                  @"Timed out waiting for response asynch method completion");
+}
+
+
+- (void)testAddValidReply{
     
     __block BOOL isDone     = NO;
-    NSString *reply         = @"asdadasdaasd";
+    int randomNumber        = arc4random() % 500;
+    NSString *reply         = [NSString stringWithFormat:@"%d", randomNumber];
     NSString *commentId     = @"2370";
     NSString *postId        = @"81934";
     
@@ -171,6 +198,29 @@
         isDone = YES;
         XCTFail(@"%@",errorMsg);
     }];
+    XCTAssertTrue([self waitFor:&isDone timeout:30],
+                  @"Timed out waiting for response asynch method completion");
+}
+
+- (void)testAddInvalidReply{
+    
+    __block BOOL isDone     = NO;
+    NSString *reply         = @"asdadasdaasd";
+    NSString *commentId     = @"2370";
+    NSString *postId        = @"81934";
+    
+    [[NSUserDefaults standardUserDefaults] setValue:@"arundev.s@marker.co.nz|1407404566|d8a3cdbba842099e391fbd3f5cd0a2be" forKey:kAuthCookie];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    PNGAddCommentWebService *addCommentWebservice = [[PNGAddCommentWebService alloc] init];
+    [addCommentWebservice addReply:reply forCommentId:commentId forPostId:postId requestSucceeded:^{
+        
+        XCTFail(@"Invalid Reply");
+        isDone = YES;
+    }
+    requestFailed:^(NSString *errorMsg){
+                         
+                         isDone = YES;
+                     }];
     XCTAssertTrue([self waitFor:&isDone timeout:30],
                   @"Timed out waiting for response asynch method completion");
 }
@@ -209,11 +259,6 @@
 
 - (void)initialiseParse
 {
-    [PNGCategory registerSubclass];
-    [PNGArticle registerSubclass];
-    [PNGStory registerSubclass];
-    [PNGFile registerSubclass];
-    [PNGComment registerSubclass];
     [Parse setApplicationId:PARSE_APPLICATION_ID
                   clientKey:PARSE_CLIENT_KEY];
 }

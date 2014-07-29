@@ -9,10 +9,6 @@
 #import <XCTest/XCTest.h>
 #import <Parse/Parse.h>
 #import "PNGArticle.h"
-#import "PNGCategory.h"
-#import "PNGStory.h"
-#import "PNGFile.h"
-#import "PNGComment.h"
 
 
 @interface PNGFeedsAPITestCase : XCTestCase
@@ -33,13 +29,13 @@
     [super tearDown];
 }
 
-- (void)testFeedFetching
+- (void)testFetchFeeds
 {
+    [self initialiseParse];
     __block BOOL isDone     = NO;
     NSNumber *categoryId    = [NSNumber numberWithInt:187];
     NSDictionary *params    = @{@"category":categoryId, @"page":[NSNumber numberWithInt:0]};
     
-    [self initialiseParse:params];
     [PFCloud callFunctionInBackground:@"getFeed"
                        withParameters:params
                                 block:^(NSDictionary *result, NSError *error) {
@@ -51,7 +47,7 @@
                                         NSArray *featured = [result valueForKey:@"featured"];
                                         XCTAssert([featured isKindOfClass:[NSArray class]], @"is kind of NSArray class");
                                         XCTAssertNotNil(featured, @"featured is not nil");
-                                        if(featured.count > 0) {
+                                        if([featured count] > 0) {
                                             id featuredArticle = featured.firstObject;
                                             XCTAssertNotNil(featuredArticle, @"featured article is not nil");
                                             XCTAssert([featuredArticle isKindOfClass:[PNGArticle class]], @"It is PNGArticle class");
@@ -59,7 +55,7 @@
                                         NSArray *promoted = [result valueForKey:@"priority"];
                                         XCTAssert([promoted isKindOfClass:[NSArray class]], @"It is NSArray class");
                                         XCTAssertNotNil(promoted, @"promoted is not nil");
-                                        if(promoted.count > 1) {
+                                        if([promoted count] > 1) {
                                             PNGArticle *promotedArticle = promoted.firstObject;
                                             XCTAssertNotNil(promotedArticle, @"promotedArticle is not nil");
                                             XCTAssert([promotedArticle isKindOfClass:[PNGArticle class]],@"PNGArticle class");
@@ -79,16 +75,11 @@
 }
 
 #pragma mark - Function to initialise Parse
-- (void)initialiseParse:(NSDictionary *)launchOptions {
+- (void)initialiseParse{
 
-    [PNGCategory registerSubclass];
     [PNGArticle registerSubclass];
-    [PNGStory registerSubclass];
-    [PNGFile registerSubclass];
-    [PNGComment registerSubclass];
     [Parse setApplicationId:PARSE_APPLICATION_ID
                   clientKey:PARSE_CLIENT_KEY];
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
 }
 
