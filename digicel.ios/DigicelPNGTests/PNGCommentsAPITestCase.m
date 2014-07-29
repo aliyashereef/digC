@@ -129,9 +129,11 @@
     
      __block BOOL isDone    = NO;
     
-    int randomNumber        = arc4random() % 500;
-    NSString *comment       = [NSString stringWithFormat:@"%d", randomNumber];
-    NSString *postId        = @"93088";
+    NSDate *currentDateInLocal      = [NSDate date];
+    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:SS.SSS'Z'"];
+    NSString *comment               = [dateFormatter stringFromDate:currentDateInLocal];
+    NSString *postId                = @"93088";
     
     [[NSUserDefaults standardUserDefaults] setValue:@"arundev.s@marker.co.nz|1407404566|d8a3cdbba842099e391fbd3f5cd0a2be" forKey:kAuthCookie];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -180,11 +182,13 @@
 
 - (void)testAddValidReply{
     
-    __block BOOL isDone     = NO;
-    int randomNumber        = arc4random() % 500;
-    NSString *reply         = [NSString stringWithFormat:@"%d", randomNumber];
-    NSString *commentId     = @"2370";
-    NSString *postId        = @"81934";
+    __block BOOL isDone             = NO;
+    NSDate *currentDateInLocal      = [NSDate date];
+    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:SS.SSS'Z'"];
+    NSString *reply                 = [dateFormatter stringFromDate:currentDateInLocal];
+    NSString *commentId             = @"2370";
+    NSString *postId                = @"81934";
     
     [[NSUserDefaults standardUserDefaults] setValue:@"arundev.s@marker.co.nz|1407404566|d8a3cdbba842099e391fbd3f5cd0a2be" forKey:kAuthCookie];
     [[NSUserDefaults standardUserDefaults] synchronize];
