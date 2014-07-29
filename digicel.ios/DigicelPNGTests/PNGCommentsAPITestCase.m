@@ -129,10 +129,7 @@
     
      __block BOOL isDone    = NO;
     
-    NSDate *currentDateInLocal      = [NSDate date];
-    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:SS.SSS'Z'"];
-    NSString *comment               = [dateFormatter stringFromDate:currentDateInLocal];
+    NSString *comment               = [self getUniqueString];
     NSString *postId                = @"93088";
     
     [[NSUserDefaults standardUserDefaults] setValue:@"arundev.s@marker.co.nz|1407404566|d8a3cdbba842099e391fbd3f5cd0a2be" forKey:kAuthCookie];
@@ -183,10 +180,7 @@
 - (void)testAddValidReply{
     
     __block BOOL isDone             = NO;
-    NSDate *currentDateInLocal      = [NSDate date];
-    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:SS.SSS'Z'"];
-    NSString *reply                 = [dateFormatter stringFromDate:currentDateInLocal];
+    NSString *reply                 = [self getUniqueString];
     NSString *commentId             = @"2370";
     NSString *postId                = @"81934";
     
@@ -257,6 +251,17 @@
     }
     while (!*flag);
     return *flag;
+}
+
+#pragma mark - Function to get unique string
+
+-(NSString *)getUniqueString
+{
+    NSDate *currentDateInLocal      = [NSDate date];
+    NSDateFormatter *dateFormatter  = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:SS.SSS'Z'"];
+    NSString *uniqueString          = [dateFormatter stringFromDate:currentDateInLocal];
+    return uniqueString;
 }
 
 #pragma mark - Function to initialise Parse
