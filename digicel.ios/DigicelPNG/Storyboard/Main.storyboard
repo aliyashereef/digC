@@ -5,10 +5,10 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Custom Navigation View Controller-->
         <scene sceneID="LPu-ie-nUI">
             <objects>
-                <navigationController definesPresentationContext="YES" id="1kZ-Ax-qxn" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="1kZ-Ax-qxn" customClass="PNGCustomNavigationViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="aMG-Au-ywg">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -603,6 +603,56 @@
             </objects>
             <point key="canvasLocation" x="988" y="-708"/>
         </scene>
+        <!--Full Screen View Controller-->
+        <scene sceneID="0em-bH-So5">
+            <objects>
+                <viewController id="fak-Pn-8at" customClass="PNGFullScreenViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zoT-d7-bQf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rsf-R3-dyH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qVq-fC-NoQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PbF-W6-ff4">
+                                <rect key="frame" x="5" y="54" width="310" height="466"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcQ-e6-69f">
+                                <rect key="frame" x="278" y="16" width="37" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="g7f-8R-jzf"/>
+                                </constraints>
+                                <state key="normal" title="Done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="DoneButton:" destination="fak-Pn-8at" eventType="touchUpInside" id="qWZ-a4-t3h"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dcQ-e6-69f" firstAttribute="top" secondItem="zoT-d7-bQf" secondAttribute="bottom" constant="-4" id="8qe-YG-NqE"/>
+                            <constraint firstAttribute="trailing" secondItem="PbF-W6-ff4" secondAttribute="trailing" constant="5" id="BYs-48-izQ"/>
+                            <constraint firstAttribute="trailing" secondItem="dcQ-e6-69f" secondAttribute="trailing" constant="5" id="RbY-rb-6RR"/>
+                            <constraint firstItem="PbF-W6-ff4" firstAttribute="leading" secondItem="qVq-fC-NoQ" secondAttribute="leading" constant="5" id="VbQ-Xy-AkE"/>
+                            <constraint firstItem="Rsf-R3-dyH" firstAttribute="top" secondItem="PbF-W6-ff4" secondAttribute="bottom" constant="48" id="jSB-x7-uci"/>
+                            <constraint firstItem="dcQ-e6-69f" firstAttribute="top" secondItem="zoT-d7-bQf" secondAttribute="bottom" constant="-4" id="nCR-y8-9tf"/>
+                            <constraint firstItem="PbF-W6-ff4" firstAttribute="top" secondItem="dcQ-e6-69f" secondAttribute="bottom" constant="8" id="ytG-hi-Q9P"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="E1I-SP-trH"/>
+                    <connections>
+                        <outlet property="fullScreenImageView" destination="PbF-W6-ff4" id="JuH-YO-ynI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MqI-HS-Vlz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2311" y="-680"/>
+        </scene>
         <!--Weather View Controller-->
         <scene sceneID="qnC-do-Xab">
             <objects>
@@ -1089,6 +1139,7 @@
                         <outlet property="titleContainerHeight" destination="vOG-RP-j06" id="Il9-Tb-I6r"/>
                         <outlet property="titleLabel" destination="osh-Zd-3w5" id="t3u-7G-e1O"/>
                         <outlet property="titleLabelHeight" destination="5Vv-7T-g4p" id="thv-Fb-5im"/>
+                        <segue destination="fak-Pn-8at" kind="modal" identifier="fullScreenImageView" modalTransitionStyle="coverVertical" id="Ddf-Ot-KYr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pIn-mD-3gS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2825,7 +2876,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="T2Q-R1-R4Z"/>
-        <segue reference="UJz-xV-Drf"/>
+        <segue reference="1mp-mY-Vxf"/>
+        <segue reference="X8x-vC-jJp"/>
     </inferredMetricsTieBreakers>
 </document>

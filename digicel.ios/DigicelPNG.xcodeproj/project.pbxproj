@@ -69,9 +69,11 @@
 		22DBE30F19824FBB007417CD /* GAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2253C3DD192CC6BA000B215A /* GAManager.m */; };
 		22DDD1201952FF620019CAFE /* PNGAddCommentWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DDD11F1952FF620019CAFE /* PNGAddCommentWebService.m */; };
 		22DF68F6192A0ED600BD2A8C /* PNGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DF68F5192A0ED600BD2A8C /* PNGUser.m */; };
+		22DFAF78198A1007007969AA /* PNGFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DFAF77198A1007007969AA /* PNGFullScreenViewController.m */; };
 		22F05C89192DAD4D0064E15C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F05C88192DAD4D0064E15C /* libGoogleAnalyticsServices.a */; };
 		22F05C8B192DAD7D0064E15C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F05C8A192DAD7D0064E15C /* AdSupport.framework */; };
 		22F05C8D192DAD970064E15C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F05C8C192DAD970064E15C /* CoreData.framework */; };
+		22F109ED198A5C80008D4CBB /* PNGCustomNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F109EC198A5C80008D4CBB /* PNGCustomNavigationViewController.m */; };
 		22F967051936F2A3006CA11C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F967041936F2A3006CA11C /* AVFoundation.framework */; };
 		22FB3160197E56F50029F487 /* PNGLoginAPITestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FB315F197E56F50029F487 /* PNGLoginAPITestCase.m */; };
 		271E55E6192DD41300090490 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 271E55E3192DD41300090490 /* Lato-Black.ttf */; };
@@ -241,6 +243,8 @@
 		22DDD11F1952FF620019CAFE /* PNGAddCommentWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGAddCommentWebService.m; sourceTree = "<group>"; };
 		22DF68F4192A0ED600BD2A8C /* PNGUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNGUser.h; sourceTree = "<group>"; };
 		22DF68F5192A0ED600BD2A8C /* PNGUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGUser.m; sourceTree = "<group>"; };
+		22DFAF76198A1007007969AA /* PNGFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNGFullScreenViewController.h; sourceTree = "<group>"; };
+		22DFAF77198A1007007969AA /* PNGFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGFullScreenViewController.m; sourceTree = "<group>"; };
 		22E17CAD197F84DF009190E9 /* PNGFeedsAPITestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGFeedsAPITestCase.m; sourceTree = "<group>"; };
 		22E17CAF197FA423009190E9 /* PNGCommentsAPITestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGCommentsAPITestCase.m; sourceTree = "<group>"; };
 		22F05C82192DAD4D0064E15C /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 		22F05C88192DAD4D0064E15C /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		22F05C8A192DAD7D0064E15C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		22F05C8C192DAD970064E15C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		22F109EB198A5C80008D4CBB /* PNGCustomNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNGCustomNavigationViewController.h; sourceTree = "<group>"; };
+		22F109EC198A5C80008D4CBB /* PNGCustomNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGCustomNavigationViewController.m; sourceTree = "<group>"; };
 		22F967041936F2A3006CA11C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		22FB315F197E56F50029F487 /* PNGLoginAPITestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGLoginAPITestCase.m; sourceTree = "<group>"; };
 		22FB3163197E7EA20029F487 /* PNGSignupAPITestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGSignupAPITestCase.m; sourceTree = "<group>"; };
@@ -866,6 +872,10 @@
 			children = (
 				34A187D51926D143006EC05F /* PNGArticlesPageViewController.h */,
 				34A187D61926D143006EC05F /* PNGArticlesPageViewController.m */,
+				22F109EB198A5C80008D4CBB /* PNGCustomNavigationViewController.h */,
+				22F109EC198A5C80008D4CBB /* PNGCustomNavigationViewController.m */,
+				22DFAF76198A1007007969AA /* PNGFullScreenViewController.h */,
+				22DFAF77198A1007007969AA /* PNGFullScreenViewController.m */,
 				34A187671926B689006EC05F /* PNGArticlesViewController.h */,
 				34A187681926B689006EC05F /* PNGArticlesViewController.m */,
 				34A188091926DA9A006EC05F /* PNGWeatherViewController.h */,
@@ -1306,6 +1316,7 @@
 				34A188081926DA55006EC05F /* PNGEditProfileViewController.m in Sources */,
 				34A1876F1926B7CD006EC05F /* PNGStoryboardManager.m in Sources */,
 				CB4819BB192C6C5D005C3935 /* UIImageView+WebCache.m in Sources */,
+				22DFAF78198A1007007969AA /* PNGFullScreenViewController.m in Sources */,
 				CB4819B7192C6C5D005C3935 /* UIButton+WebCache.m in Sources */,
 				CB567ADE193C970100D52114 /* PNGSubCategoryViewController.m in Sources */,
 				34A187DD1926D222006EC05F /* PNGCommentsViewController.m in Sources */,
@@ -1323,6 +1334,7 @@
 				34A187EA1926D32F006EC05F /* PNGSignInViewController.m in Sources */,
 				CB4819B6192C6C5D005C3935 /* SDWebImagePrefetcher.m in Sources */,
 				CB4819B9192C6C5D005C3935 /* UIImage+MultiFormat.m in Sources */,
+				22F109ED198A5C80008D4CBB /* PNGCustomNavigationViewController.m in Sources */,
 				CB4819B1192C6C5D005C3935 /* SDWebImageCompat.m in Sources */,
 				22DDD1201952FF620019CAFE /* PNGAddCommentWebService.m in Sources */,
 				34A186E81926B40C006EC05F /* main.m in Sources */,

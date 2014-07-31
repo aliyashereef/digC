@@ -14,8 +14,9 @@
 #import "PNGAddCommentViewController.h"
 #import <MadsSDK/MadsSDK.h>
 #import "GAITrackedViewController.h"
+#import "PNGFullScreenViewController.h"
 
-@interface PNGArticleViewController : GAITrackedViewController <MadsAdViewDelegate> {
+@interface PNGArticleViewController : GAITrackedViewController <MadsAdViewDelegate,UIGestureRecognizerDelegate> {
     
     IBOutlet UIImageView *articleImageView;
     IBOutlet PNGLatoLabel *titleLabel;

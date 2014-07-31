@@ -17,6 +17,7 @@
 #import "PNGComment.h"
 #import "GAManager.h"
 #import <Raygun4iOS/Raygun.h>
+#import "PNGFullScreenViewController.h"
 
 @implementation PNGAppDelegate
 
@@ -51,6 +52,7 @@
 
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -157,6 +159,20 @@
         // Clear this token
         [FBSession.activeSession closeAndClearTokenInformation];
     }
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    
+    UINavigationController *viewController = (UINavigationController*)self.window.rootViewController;
+    if (viewController) {
+        UIViewController *currentViewController = [viewController visibleViewController];
+        //by this UIViewController that needs landscape is identified
+        if ([currentViewController isKindOfClass:[PNGFullScreenViewController class]])
+            return [currentViewController supportedInterfaceOrientations];
+        
+    }
+    
+    return UIInterfaceOrientationMaskPortrait; //return default value
 }
 
 

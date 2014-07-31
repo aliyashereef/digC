@@ -36,6 +36,12 @@
          addCommentViewController.postId = self.article.wpID;
         [self.navigationController pushViewController:addCommentViewController animated:YES];
     }
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+                                                                initWithTarget:self
+                                                                        action:@selector(imageTaped)];
+    articleImageView.userInteractionEnabled = YES;
+    [articleImageView addGestureRecognizer:tapRecognizer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -177,6 +183,19 @@
 - (void)didFailToReceiveAd:(id)sender withError:(NSError*)error {
     if (self.isViewLoaded && self.view.window) {
         [self updateViewFrames];
+    }
+}
+
+- (void)imageTaped
+{
+    [self performSegueWithIdentifier:@"fullScreenImageView" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"fullScreenImageView"]) {
+        PNGFullScreenViewController *fullScreen = [segue destinationViewController];
+        fullScreen.imageUrl = _article.postImageURL;
     }
 }
 
