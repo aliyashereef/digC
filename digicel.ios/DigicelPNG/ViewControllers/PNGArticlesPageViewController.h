@@ -54,6 +54,7 @@
     UIImageView *logoView;
     NSInteger currentIndex;
     NSInteger nextIndex;
+    MadsAdView *madsOverlayAdView;
 }
 
 @property (nonatomic, assign) BOOL isSearching;
