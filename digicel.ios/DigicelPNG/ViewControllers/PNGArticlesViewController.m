@@ -38,7 +38,6 @@
     articlesArray = [[NSMutableArray alloc] init];
     [self fetchCategoryArticles];
     [self addCategoryView];
-    [self addOverlayAd];
     
 }
 
@@ -230,16 +229,6 @@
     MadsAdView *madsAdView = [[MadsAdView alloc] initWithFrame:CGRectMake(0.0, 6.0, 320, 150.0) zone:adsZone secret:kMadsInlineAdSecret delegate:nil];
     madsAdView.madsAdType = MadsAdTypeInline;
     return madsAdView;
-}
-
-//  Adding overlay ads in view
-- (void)addOverlayAd {
-    MadsAdView *madsAdView = [[MadsAdView alloc] initWithFrame:CGRectZero zone:@"0435490871" secret:kMadsInlineAdSecret delegate:self];
-    madsAdView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    madsAdView.madsAdType = MadsAdTypeOverlay;
-    madsAdView.updateTimeInterval = 300;
-    [self.view addSubview:madsAdView];
-    [self.view bringSubviewToFront:madsAdView];
 }
 
 #pragma mark - Notification methods

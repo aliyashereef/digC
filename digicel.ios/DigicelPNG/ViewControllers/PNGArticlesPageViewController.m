@@ -50,7 +50,7 @@ typedef enum {
     [self addMenuTable];
     [self addSearchResultsView];
     [self addCategoriesBanner];
-    
+    [self addOverlayAd];
     [self createViewControllerPages];
     [self.pageViewController setViewControllers:@[[self.sections firstObject]]
                                       direction:UIPageViewControllerNavigationDirectionForward
@@ -218,6 +218,7 @@ typedef enum {
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
     if(completed){
         currentIndex = nextIndex;
+        [self adUpdated];
     }
     nextIndex = 0;
 }
@@ -598,6 +599,7 @@ typedef enum {
                                    animated:NO
                                  completion:nil];
     [self showOrHideMenuView:nil];
+    [self adUpdated];
 }
 
 //  Invoked on selecting an item from subcategory list.
@@ -605,6 +607,33 @@ typedef enum {
     NSDictionary *category = notification.object;
     regionCategoryLabel.text = [category valueForKey:@"title"];
 }
+
+
+//Adding overlay ads in view
+- (void)addOverlayAd {
+    NSDictionary *category = [categories objectAtIndex: currentIndex];
+    NSString *adsZone = [category valueForKey:@"ad_id_overlay"];
+    madsOverlayAdView = [[MadsAdView alloc] initWithFrame:CGRectZero zone:adsZone secret:kMadsInlineAdSecret delegate:self];
+    madsOverlayAdView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    madsOverlayAdView.madsAdType = MadsAdTypeOverlay;
+    madsOverlayAdView.updateTimeInterval = 120;
+    [self.view addSubview:madsOverlayAdView];
+    [self.view bringSubviewToFront:madsOverlayAdView];
+}
+
+- (void)adUpdated {
+    NSDictionary *category = [categories objectAtIndex: currentIndex];
+    NSString *adsZone = [category valueForKey:@"ad_id_overlay"];
+    madsOverlayAdView.zone = adsZone;
+    if(madsOverlayAdView.superview){
+        [madsOverlayAdView update];
+    }else{
+        [madsOverlayAdView update];
+        [self.view addSubview:madsOverlayAdView];
+        [self.view bringSubviewToFront:madsOverlayAdView];
+    }
+}
+
 
 #pragma mark - ArticlesTableSelectionDelegate
 
