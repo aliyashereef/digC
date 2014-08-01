@@ -9,6 +9,10 @@
 #import "PNGFullScreenViewController.h"
 
 @interface PNGFullScreenViewController ()
+{
+    CGPoint imageCenter, newCenter;
+    CGRect frame;
+}
 
 @end
 
@@ -27,13 +31,31 @@
 {
     [super viewDidLoad];
     [self.fullScreenImageView setImageWithURL:[NSURL URLWithString:self.imageUrl] placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];
-    // Do any additional setup after loading the view.
+    imageCenter = _fullScreenImageView.center;
+    frame = _fullScreenImageView.frame;
+   
 }
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
+    if (newCenter.y < imageCenter.y) {
+        _fullScreenImageView.center = imageCenter;
+    }
+    return _fullScreenImageView;
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView{
+    newCenter = _fullScreenImageView.center;
+}
+
+- (IBAction)DoneButton:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
@@ -47,7 +69,6 @@
 }
 */
 
-- (IBAction)DoneButton:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
+
 @end

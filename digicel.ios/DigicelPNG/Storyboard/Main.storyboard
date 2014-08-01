@@ -615,16 +615,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PbF-W6-ff4">
-                                <rect key="frame" x="5" y="54" width="310" height="466"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.5" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="sn4-hq-Den">
+                                <rect key="frame" x="0.0" y="16" width="320" height="544"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OHI-zc-S2B">
+                                        <rect key="frame" x="0.0" y="24" width="320" height="500"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="OHI-zc-S2B" firstAttribute="height" secondItem="sn4-hq-Den" secondAttribute="height" constant="-44" id="6Vq-Yw-DYE"/>
+                                    <constraint firstItem="OHI-zc-S2B" firstAttribute="width" secondItem="sn4-hq-Den" secondAttribute="width" id="Fhz-4K-Dej"/>
+                                    <constraint firstItem="OHI-zc-S2B" firstAttribute="top" secondItem="sn4-hq-Den" secondAttribute="top" constant="24" id="fbF-DH-fHl"/>
+                                    <constraint firstAttribute="bottom" secondItem="OHI-zc-S2B" secondAttribute="bottom" constant="20" id="gRR-1B-Itk"/>
+                                    <constraint firstItem="OHI-zc-S2B" firstAttribute="leading" secondItem="sn4-hq-Den" secondAttribute="leading" id="mbs-nA-ZSn"/>
+                                    <constraint firstAttribute="trailing" secondItem="OHI-zc-S2B" secondAttribute="trailing" id="wZc-ZT-ket"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="fak-Pn-8at" id="i7h-9e-iC2"/>
+                                </connections>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcQ-e6-69f">
                                 <rect key="frame" x="278" y="16" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="g7f-8R-jzf"/>
-                                </constraints>
                                 <state key="normal" title="Done">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -633,20 +647,20 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dcQ-e6-69f" firstAttribute="top" secondItem="zoT-d7-bQf" secondAttribute="bottom" constant="-4" id="8qe-YG-NqE"/>
-                            <constraint firstAttribute="trailing" secondItem="PbF-W6-ff4" secondAttribute="trailing" constant="5" id="BYs-48-izQ"/>
-                            <constraint firstAttribute="trailing" secondItem="dcQ-e6-69f" secondAttribute="trailing" constant="5" id="RbY-rb-6RR"/>
-                            <constraint firstItem="PbF-W6-ff4" firstAttribute="leading" secondItem="qVq-fC-NoQ" secondAttribute="leading" constant="5" id="VbQ-Xy-AkE"/>
-                            <constraint firstItem="Rsf-R3-dyH" firstAttribute="top" secondItem="PbF-W6-ff4" secondAttribute="bottom" constant="48" id="jSB-x7-uci"/>
-                            <constraint firstItem="dcQ-e6-69f" firstAttribute="top" secondItem="zoT-d7-bQf" secondAttribute="bottom" constant="-4" id="nCR-y8-9tf"/>
-                            <constraint firstItem="PbF-W6-ff4" firstAttribute="top" secondItem="dcQ-e6-69f" secondAttribute="bottom" constant="8" id="ytG-hi-Q9P"/>
+                            <constraint firstItem="dcQ-e6-69f" firstAttribute="top" secondItem="zoT-d7-bQf" secondAttribute="bottom" constant="-4" id="ABT-sZ-Oju"/>
+                            <constraint firstItem="sn4-hq-Den" firstAttribute="width" secondItem="qVq-fC-NoQ" secondAttribute="width" id="Kh4-yc-o4i"/>
+                            <constraint firstItem="sn4-hq-Den" firstAttribute="leading" secondItem="qVq-fC-NoQ" secondAttribute="leading" id="Kx9-jB-gAH"/>
+                            <constraint firstItem="Rsf-R3-dyH" firstAttribute="top" secondItem="dcQ-e6-69f" secondAttribute="bottom" constant="522" id="Nsa-Ed-bJh"/>
+                            <constraint firstItem="dcQ-e6-69f" firstAttribute="top" secondItem="qVq-fC-NoQ" secondAttribute="top" constant="16" id="PfA-i4-XE7"/>
+                            <constraint firstItem="sn4-hq-Den" firstAttribute="height" secondItem="qVq-fC-NoQ" secondAttribute="height" constant="-24" id="WxB-xe-Qfu"/>
+                            <constraint firstAttribute="trailing" secondItem="dcQ-e6-69f" secondAttribute="trailing" constant="5" id="dKI-tb-p7d"/>
+                            <constraint firstItem="Rsf-R3-dyH" firstAttribute="top" secondItem="sn4-hq-Den" secondAttribute="bottom" constant="8" id="ler-g3-YJV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="E1I-SP-trH"/>
                     <connections>
-                        <outlet property="fullScreenImageView" destination="PbF-W6-ff4" id="JuH-YO-ynI"/>
+                        <outlet property="fullScreenImageView" destination="OHI-zc-S2B" id="suu-Ym-Vro"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MqI-HS-Vlz" userLabel="First Responder" sceneMemberID="firstResponder"/>

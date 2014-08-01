@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "UIImageView+WebCache.h"
 
-@interface PNGFullScreenViewController : UIViewController
+@interface PNGFullScreenViewController : UIViewController <UIScrollViewDelegate>
+
 @property (nonatomic,strong) NSString *imageUrl;
 @property (weak, nonatomic) IBOutlet UIImageView *fullScreenImageView;
+
 - (IBAction)DoneButton:(id)sender;
 
 
