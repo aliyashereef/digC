@@ -44,8 +44,4 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
-
-
 @end
