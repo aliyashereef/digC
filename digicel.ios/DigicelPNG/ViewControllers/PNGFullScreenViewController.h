@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIImageView+WebCache.h"
 
 @interface PNGFullScreenViewController : UIViewController <UIScrollViewDelegate>
 

@@ -615,20 +615,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.5" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="sn4-hq-Den">
-                                <rect key="frame" x="0.0" y="16" width="320" height="544"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="sn4-hq-Den">
+                                <rect key="frame" x="0.0" y="71" width="320" height="489"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OHI-zc-S2B">
-                                        <rect key="frame" x="0.0" y="24" width="320" height="500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="418"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="OHI-zc-S2B" firstAttribute="height" secondItem="sn4-hq-Den" secondAttribute="height" constant="-44" id="6Vq-Yw-DYE"/>
+                                    <constraint firstItem="OHI-zc-S2B" firstAttribute="height" secondItem="sn4-hq-Den" secondAttribute="height" constant="-71" id="6Vq-Yw-DYE"/>
                                     <constraint firstItem="OHI-zc-S2B" firstAttribute="width" secondItem="sn4-hq-Den" secondAttribute="width" id="Fhz-4K-Dej"/>
-                                    <constraint firstItem="OHI-zc-S2B" firstAttribute="top" secondItem="sn4-hq-Den" secondAttribute="top" constant="24" id="fbF-DH-fHl"/>
-                                    <constraint firstAttribute="bottom" secondItem="OHI-zc-S2B" secondAttribute="bottom" constant="20" id="gRR-1B-Itk"/>
+                                    <constraint firstItem="OHI-zc-S2B" firstAttribute="top" secondItem="sn4-hq-Den" secondAttribute="top" id="fbF-DH-fHl"/>
+                                    <constraint firstAttribute="bottom" secondItem="OHI-zc-S2B" secondAttribute="bottom" constant="71" id="gRR-1B-Itk"/>
                                     <constraint firstItem="OHI-zc-S2B" firstAttribute="leading" secondItem="sn4-hq-Den" secondAttribute="leading" id="mbs-nA-ZSn"/>
                                     <constraint firstAttribute="trailing" secondItem="OHI-zc-S2B" secondAttribute="trailing" id="wZc-ZT-ket"/>
                                 </constraints>
@@ -637,7 +637,7 @@
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcQ-e6-69f">
-                                <rect key="frame" x="278" y="16" width="37" height="30"/>
+                                <rect key="frame" x="263" y="33" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Done">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -648,13 +648,11 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="dcQ-e6-69f" firstAttribute="top" secondItem="zoT-d7-bQf" secondAttribute="bottom" constant="-4" id="ABT-sZ-Oju"/>
+                            <constraint firstAttribute="trailing" secondItem="dcQ-e6-69f" secondAttribute="trailing" constant="20" id="1LB-jv-u2o"/>
                             <constraint firstItem="sn4-hq-Den" firstAttribute="width" secondItem="qVq-fC-NoQ" secondAttribute="width" id="Kh4-yc-o4i"/>
                             <constraint firstItem="sn4-hq-Den" firstAttribute="leading" secondItem="qVq-fC-NoQ" secondAttribute="leading" id="Kx9-jB-gAH"/>
-                            <constraint firstItem="Rsf-R3-dyH" firstAttribute="top" secondItem="dcQ-e6-69f" secondAttribute="bottom" constant="522" id="Nsa-Ed-bJh"/>
-                            <constraint firstItem="dcQ-e6-69f" firstAttribute="top" secondItem="qVq-fC-NoQ" secondAttribute="top" constant="16" id="PfA-i4-XE7"/>
-                            <constraint firstItem="sn4-hq-Den" firstAttribute="height" secondItem="qVq-fC-NoQ" secondAttribute="height" constant="-24" id="WxB-xe-Qfu"/>
-                            <constraint firstAttribute="trailing" secondItem="dcQ-e6-69f" secondAttribute="trailing" constant="5" id="dKI-tb-p7d"/>
+                            <constraint firstItem="dcQ-e6-69f" firstAttribute="top" secondItem="zoT-d7-bQf" secondAttribute="bottom" constant="13" id="OnM-V9-BVV"/>
+                            <constraint firstItem="sn4-hq-Den" firstAttribute="height" secondItem="qVq-fC-NoQ" secondAttribute="height" constant="-79" id="WxB-xe-Qfu"/>
                             <constraint firstItem="Rsf-R3-dyH" firstAttribute="top" secondItem="sn4-hq-Den" secondAttribute="bottom" constant="8" id="ler-g3-YJV"/>
                         </constraints>
                     </view>
