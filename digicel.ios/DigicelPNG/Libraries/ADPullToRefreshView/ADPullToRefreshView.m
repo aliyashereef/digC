@@ -10,7 +10,7 @@
 
 #define kDefaultViewBg	 [UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:229.0/255.0 alpha:1.0]
 #define kSearchViewBg	 [UIColor colorWithRed:25.0/255.0 green:150.0/255.0 blue:220.0/255.0 alpha:1.0]
-#define kRefreshViewBg	 [UIColor colorWithRed:31.0/255.0 green:160.0/255.0 blue:145.0/255.0 alpha:1.0]
+#define kRefreshViewBg	 [UIColor colorWithRed:170.0/255.0 green:0.0 blue:2.0/255.0 alpha:1.0]
 
 
 @implementation ADPullToRefreshView

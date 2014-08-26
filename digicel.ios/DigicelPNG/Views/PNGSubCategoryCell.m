@@ -18,7 +18,7 @@
     [super setSelected:selected animated:animated];
     if(selected) {
         self.tickView.hidden = NO;
-        self.titleLabel.textColor = kThemeGreen;
+        self.titleLabel.textColor = kThemeRed;
     } else {
         self.tickView.hidden = YES;
         self.titleLabel.textColor = [UIColor blackColor];
@@ -29,7 +29,7 @@
     [super setHighlighted:highlighted animated:animated];
     if(highlighted) {
         self.tickView.hidden = NO;
-        self.titleLabel.textColor = kThemeGreen;
+        self.titleLabel.textColor = kThemeRed;
     } else {
         self.tickView.hidden = YES;
         self.titleLabel.textColor = [UIColor blackColor];

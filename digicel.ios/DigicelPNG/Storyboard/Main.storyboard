@@ -12,7 +12,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="aMG-Au-ywg">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.67450980392156867" blue="0.63529411764705879" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -993,7 +993,7 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HA-h4-WIG" customClass="PNGLatoButton">
                                                                 <rect key="frame" x="12" y="15" width="296" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <color key="backgroundColor" red="0.1215686275" green="0.61960784310000006" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="backgroundColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="50" id="sJ0-mB-YA8"/>
                                                                 </constraints>
@@ -1447,7 +1447,7 @@
                                                                     <rect key="frame" x="0.0" y="12" width="137" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                                    <color key="textColor" red="0.0" green="0.67450980392156867" blue="0.63529411764705879" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="textColor" red="0.66666668653488159" green="0.0" blue="0.094117656350135803" alpha="1" colorSpace="deviceRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-down-arrow-comments" translatesAutoresizingMaskIntoConstraints="NO" id="bj3-9X-P7Z">
@@ -1614,7 +1614,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="96G-QJ-gGk">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -1668,6 +1668,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dk0-gZ-kCT" customClass="PNGLatoButton">
                                         <rect key="frame" x="0.0" y="0.0" width="296" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Sign in with email">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1695,7 +1696,7 @@
                                 <rect key="frame" x="228" y="378" width="55" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign Up">
-                                    <color key="titleColor" red="0.0" green="0.67450980390000004" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1825,6 +1826,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y0d-nk-YEA" customClass="PNGLatoButton">
                                         <rect key="frame" x="0.0" y="0.0" width="296" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Sign In">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1856,7 +1858,7 @@
                                 <rect key="frame" x="227" y="434" width="53" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Reset it">
-                                    <color key="titleColor" red="0.0" green="0.67450980390000004" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -2089,7 +2091,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fot-9K-0Sg" customClass="PNGLatoButton">
                                 <rect key="frame" x="12" y="186" width="296" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
@@ -2317,6 +2319,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V9I-2d-FzU" customClass="PNGLatoButton">
                                                         <rect key="frame" x="0.0" y="0.0" width="296" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <state key="normal" title="Done">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2441,7 +2444,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="cx4-zA-31E"/>
                                 </constraints>
@@ -2463,7 +2466,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6p4-xh-yDd"/>
                                 </constraints>
@@ -2602,7 +2605,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="8J2-aY-kov"/>
                                     <constraint firstAttribute="width" constant="296" id="OcA-Bw-gfY"/>
@@ -2650,7 +2653,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.67450980390000004" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -2763,7 +2766,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWt-Pd-JKl" customClass="PNGLatoButton">
                                 <rect key="frame" x="12" y="242" width="296" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.66666668650000005" green="0.0" blue="0.094117656349999995" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FAk-Na-tWm"/>
                                     <constraint firstAttribute="width" constant="296" id="blv-jz-ImL"/>
@@ -2888,7 +2891,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="UJz-xV-Drf"/>
         <segue reference="1mp-mY-Vxf"/>
-        <segue reference="X8x-vC-jJp"/>
     </inferredMetricsTieBreakers>
 </document>

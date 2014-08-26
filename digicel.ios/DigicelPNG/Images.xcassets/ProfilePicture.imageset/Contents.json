@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "my-profile-image150.png"
+      "filename" : "my-profile-image.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "my-profile-image300.png"
+      "filename" : "my-profile-image@2x.png"
     }
   ],
   "info" : {

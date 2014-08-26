@@ -99,12 +99,12 @@ typedef enum {
 
 //  Colors
 
-//  Theme green color
-#define kThemeGreen             [UIColor colorWithRed:32.0/255.0 green:158.0/255.0 blue:144.0/255.0 alpha:1.0]
+//  Theme Red color
+#define kThemeRed             [UIColor colorWithRed:170.0/255.0 green:0.0/255.0 blue:24.0/255.2 alpha:1.0]
 
-#define kPNGNewsColor           [UIColor colorWithRed:0.0/255.0 green:172.0/255.0 blue:162.0/255.0 alpha:1.0]
+#define kPNGNewsColor           [UIColor colorWithRed:200.0/255.0 green:10.0/255.0 blue:50.0/255.0 alpha:1.0]
 
-#define kRegionalColor          [UIColor colorWithRed:10.0/255.0 green:112.0/255.0 blue:115.0/255.0 alpha:1.0]
+#define kRegionalColor          [UIColor colorWithRed:112.0/255.0 green:10.0/255.0 blue:12.0/255.0 alpha:1.0]
 
 #define kEncompassColor         [UIColor colorWithRed:237.0/255.0 green:196.0/255.0 blue:7.0/255.0 alpha:1.0]
 

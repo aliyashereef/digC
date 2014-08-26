@@ -41,7 +41,7 @@
         if([_menuItem valueForKey:@"categoryId"]) {
             self.backgroundColor = [PNGUtilities getColorForCategoryItem:[[_menuItem valueForKey:@"categoryId"] intValue]];
         } else {
-            self.backgroundColor = kThemeGreen;
+            self.backgroundColor = kThemeRed;
         }
         _menuTitleLabel.textColor = [UIColor whiteColor];
         if([_menuItem valueForKey:@"image_selected"]) {
@@ -62,7 +62,7 @@
         if([_menuItem valueForKey:@"categoryId"]) {
             self.backgroundColor = [PNGUtilities getColorForCategoryItem:[[_menuItem valueForKey:@"categoryId"] intValue]];
         } else {
-            self.backgroundColor = kThemeGreen;
+            self.backgroundColor = kThemeRed;
         }
         _menuTitleLabel.textColor = [UIColor whiteColor];
         if([_menuItem valueForKey:@"image_selected"]) {
