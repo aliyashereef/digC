@@ -25,7 +25,7 @@
     NSURL *dataURL = [NSURL fileURLWithPath:path];
     NSDictionary *menuData = [[NSDictionary alloc] initWithContentsOfURL:dataURL];
     mainMenuItems = [menuData valueForKey:@"OtherMenu"];
-    classifieds = [menuData valueForKey:@"Classifieds"];
+//    classifieds = [menuData valueForKey:@"Classifieds"];
 
     UINib *cellNib = [UINib nibWithNibName:@"PNGMenuTableViewCell" bundle:[NSBundle mainBundle]];
     [menuTable registerNib:cellNib forCellReuseIdentifier:@"PNGMenuTableViewCell"];
@@ -79,8 +79,8 @@
         cell.iconView.hidden = YES;
         cell.menuTitleLabel.textAlignment = NSTextAlignmentCenter;
         cell.menuItem = nil;
-    } else if (indexPath.section == 1) {
-        cell.menuItem = [classifieds objectAtIndex:indexPath.row];
+//    } else if (indexPath.section == 1) {
+//        cell.menuItem = [classifieds objectAtIndex:indexPath.row];
     } else if(indexPath.section == 2) {
         if(_menuItems.count > 0) {
             cell.menuItem = [_menuItems objectAtIndex:indexPath.row];
@@ -175,7 +175,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -183,9 +183,9 @@
         case 0:
             return 1;
             break;
-        case 1:
-            return classifieds.count;
-            break;
+//        case 1:
+//            return classifieds.count;
+//            break;
         case 2:
             return _menuItems.count;
             break;
@@ -215,9 +215,9 @@
         case 0:
             [self performLoginAction];
             break;
-        case 1:
-            [self classifiedsSelectedAtIndex:indexPath];
-            break;
+//        case 1:
+//            [self classifiedsSelectedAtIndex:indexPath];
+//            break;
         case 2:
             [self categoriesSelectedAtIndex:indexPath];
             break;

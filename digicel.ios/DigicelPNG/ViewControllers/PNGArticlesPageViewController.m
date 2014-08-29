@@ -178,7 +178,6 @@ typedef enum {
     return articlesViewController;
 }
 
-
 #pragma mark - PageViewController DataSource
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {

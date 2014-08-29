@@ -4,6 +4,30 @@
 <array>
 	<dict>
 		<key>title</key>
+		<string>Social</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Real Estate</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Buy and sell</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Jobs</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Business for sale</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Skills &amp; Services</string>
+	</dict>
+	<dict>
+		<key>title</key>
 		<string>PNG News</string>
 		<key>categoryId</key>
 		<string>187</string>
