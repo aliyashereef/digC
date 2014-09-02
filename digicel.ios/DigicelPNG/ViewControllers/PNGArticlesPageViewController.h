@@ -17,6 +17,7 @@
 #import "PNGLatoTextField.h"
 #import "PNGArticlesTableViewController.h"
 #import "GAITrackedViewController.h"
+#import "PNGClassifieds.h"
 
 /*
  Home view of the application. Page view controller which listing articles of different categories.

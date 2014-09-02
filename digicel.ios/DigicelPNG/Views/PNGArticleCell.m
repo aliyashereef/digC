@@ -29,11 +29,17 @@
 }
 
 //  Setter method for article
-- (void)setArticle:(PNGArticle *)article {
+- (void)setArticle:(PNGArticle *)article{
     _article = article;
-    articleTitleLabel.text = article.title;
-    [articleImageView setImageWithURL:[NSURL URLWithString:article.thumbNailImageUrl]
+    if ( _parent == [NSNumber numberWithInt:1]){
+        articleTitleLabel.text = article.title;
+        [articleImageView setImageWithURL:[NSURL URLWithString:article.thumbNailImageUrl]
                      placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];
+    }else{
+        articleTitleLabel.text = [article valueForKey:@"ad_category"];
+        [articleImageView setImageWithURL:[NSURL URLWithString:[[[article valueForKey:@"ad_images"] objectAtIndex:0] valueForKey:@"path"]]
+                         placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];
+    }
 }
 
 @end

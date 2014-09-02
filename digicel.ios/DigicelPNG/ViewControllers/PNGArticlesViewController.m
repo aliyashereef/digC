@@ -36,7 +36,11 @@
     articlesFinished = NO;
     allArticles = [[NSMutableArray alloc] init];
     articlesArray = [[NSMutableArray alloc] init];
-    [self fetchCategoryArticles];
+    if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+        [self fetchCategoryArticles];
+    }else{
+        [self fetchClassifiedArticles];
+    }
     [self addCategoryView];
     
 }
@@ -210,6 +214,32 @@
                                 }];
 }
 
+//  Fetch articles of a particular classified.
+- (void)fetchClassifiedArticles{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(articlesArray) {
+        [articlesArray removeAllObjects];
+    }
+    PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+    [query whereKey:@"ad_category_parent_id" equalTo:[_category valueForKey:@"categoryId"]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self doneLoadingTableViewData];
+        if (!error) {
+            for (PFObject *object in objects) {
+                [articlesArray addObject:object];
+            }
+            [articlesTable reloadData];
+        } else {
+            NSString *errorMsg = error.localizedDescription;
+            if(error.code == 100) {
+                errorMsg = NSLocalizedString(@"NO_INTERNET", @"");
+            }
+            [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
+        }
+    }];
+}
+
 //  Adding category view as a subview.
 - (void)addCategoryView {
     if([_category valueForKey:@"subCategories"]) {
@@ -242,7 +272,11 @@
 - (void)subCategorySelected:(NSNotification *)notification {
     subCategoryViewController.view.hidden = YES;
     self.category = notification.object;
-    [self fetchCategoryArticles];
+    if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+        [self fetchCategoryArticles];
+    }else{
+        [self fetchClassifiedArticles];
+    }
 }
 
 #pragma mark - Navigation
@@ -274,16 +308,20 @@
     } else if([article isKindOfClass:[NSString class]]) {
         return kLoadMoreCellHeight;
     } else {
-        switch (article.type) {
-            case FeaturedArticle:
-                return kFeaturedCellHeight;
-                break;
-            case PromotedArticle:
-                return kPromotedCellHeight;
-                break;
-            default:
-                return kListTypeCellHeight;
-                break;
+        if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+            switch (article.type) {
+                case FeaturedArticle:
+                    return kFeaturedCellHeight;
+                    break;
+                case PromotedArticle:
+                    return kPromotedCellHeight;
+                    break;
+                default:
+                    return kListTypeCellHeight;
+                    break;
+            }
+        }else{
+            return kListTypeCellHeight;
         }
     }
 }
@@ -294,16 +332,21 @@
     if([article isKindOfClass:[NSNull class]]) {
         cell = [self loadAdvertCell:tableView cellForRowAtIndexPath:indexPath];
     } else {
-        switch (article.type) {
-            case FeaturedArticle:
-                cell = [self loadHighlightedArticleCell:tableView cellForRowAtIndexPath:indexPath];
-                break;
-            case PromotedArticle:
-                cell = [self loadPromotedArticleCell:tableView cellForRowAtIndexPath:indexPath];
-                break;
-            default:
-                cell = [self loadListArticleCell:tableView cellForRowAtIndexPath:indexPath];
-                break;
+        if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+
+            switch (article.type) {
+                case FeaturedArticle:
+                    cell = [self loadHighlightedArticleCell:tableView cellForRowAtIndexPath:indexPath];
+                    break;
+                case PromotedArticle:
+                    cell = [self loadPromotedArticleCell:tableView cellForRowAtIndexPath:indexPath];
+                    break;
+                default:
+                    cell = [self loadListArticleCell:tableView cellForRowAtIndexPath:indexPath];
+                    break;
+            }
+        }else{
+            cell = [self loadListArticleCell:tableView cellForRowAtIndexPath:indexPath];
         }
         if(indexPath.row == articlesArray.count-1 && !articlesFinished) {
             [self loadMoreButtonAction:nil];
@@ -344,9 +387,10 @@
     NSString *identifier = @"PNGListArticleCell";
     PNGListArticleCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if(cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];  
     }
     cell.article = [articlesArray objectAtIndex:indexPath.row];
+    cell.parent  = [_category valueForKey:@"parentId"];
     return cell;
 }
 
@@ -373,8 +417,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id object = [articlesArray objectAtIndex:indexPath.row];
     if(![object isKindOfClass:[NSNull class]]) {
-        selectedArticle = [articlesArray objectAtIndex:indexPath.row];
-        if(selectedArticle.type != PromotedArticle) { //    For promoted articles, we have 2 buttons in single cell
+        if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+            selectedArticle = [articlesArray objectAtIndex:indexPath.row];
+            if(selectedArticle.type != PromotedArticle) { //    For promoted articles, we have 2 buttons in single cell
+                [self performSegueWithIdentifier:PNGStoryboardViewControllerArticleDetail sender:self];
+            }
+        }else{
             [self performSegueWithIdentifier:PNGStoryboardViewControllerArticleDetail sender:self];
         }
     }
@@ -412,7 +460,11 @@
 //	[self reloadTableViewDataSource];
 //	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
     [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshTriggeredNotification object:nil];
-    [self fetchCategoryArticles];
+    if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+        [self fetchCategoryArticles];
+    }else{
+        [self fetchClassifiedArticles];
+    }
 }
 
 - (void)refreshTableHeaderDidTriggerSearch:(ADPullToRefreshView*)view {

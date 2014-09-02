@@ -76,6 +76,7 @@
 		22F109ED198A5C80008D4CBB /* PNGCustomNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F109EC198A5C80008D4CBB /* PNGCustomNavigationViewController.m */; };
 		22F967051936F2A3006CA11C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F967041936F2A3006CA11C /* AVFoundation.framework */; };
 		22FB3160197E56F50029F487 /* PNGLoginAPITestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FB315F197E56F50029F487 /* PNGLoginAPITestCase.m */; };
+		22FD7DB819B5933B007DE6FA /* PNGClassifieds.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD7DB719B5933B007DE6FA /* PNGClassifieds.m */; };
 		271E55E6192DD41300090490 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 271E55E3192DD41300090490 /* Lato-Black.ttf */; };
 		271E55E7192DD41300090490 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 271E55E4192DD41300090490 /* Lato-Bold.ttf */; };
 		271E55E8192DD41300090490 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 271E55E5192DD41300090490 /* Lato-Regular.ttf */; };
@@ -261,6 +262,8 @@
 		22F967041936F2A3006CA11C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		22FB315F197E56F50029F487 /* PNGLoginAPITestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGLoginAPITestCase.m; sourceTree = "<group>"; };
 		22FB3163197E7EA20029F487 /* PNGSignupAPITestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGSignupAPITestCase.m; sourceTree = "<group>"; };
+		22FD7DB619B5933B007DE6FA /* PNGClassifieds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNGClassifieds.h; sourceTree = "<group>"; };
+		22FD7DB719B5933B007DE6FA /* PNGClassifieds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGClassifieds.m; sourceTree = "<group>"; };
 		271E55E3192DD41300090490 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		271E55E4192DD41300090490 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		271E55E5192DD41300090490 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
@@ -574,6 +577,8 @@
 				CBB667AB192B468100752759 /* PNGCategory.m */,
 				CBB667AD192B4F4300752759 /* PNGArticle.h */,
 				CBB667AE192B4F4300752759 /* PNGArticle.m */,
+				22FD7DB619B5933B007DE6FA /* PNGClassifieds.h */,
+				22FD7DB719B5933B007DE6FA /* PNGClassifieds.m */,
 				CBB66806192B7E6D00752759 /* PNGMedia.h */,
 				CBB66807192B7E6D00752759 /* PNGMedia.m */,
 				22A9123619384421008EE186 /* PNGStory.h */,
@@ -1322,6 +1327,7 @@
 				34A187DD1926D222006EC05F /* PNGCommentsViewController.m in Sources */,
 				CB4819B3192C6C5D005C3935 /* SDWebImageDownloader.m in Sources */,
 				CB4819AF192C6C5D005C3935 /* NSData+ImageContentType.m in Sources */,
+				22FD7DB819B5933B007DE6FA /* PNGClassifieds.m in Sources */,
 				346643761928788B00723C90 /* PNGArticleListTableViewCell.m in Sources */,
 				221B991F195D19250065B77B /* PNGCommentReplyCell.m in Sources */,
 				CBB66808192B7E6D00752759 /* PNGMedia.m in Sources */,

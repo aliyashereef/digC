@@ -21,5 +21,5 @@
 }
 
 @property (nonatomic, strong) PNGArticle *article;
-
+@property (nonatomic, strong) NSNumber *parent;
 @end

@@ -18,6 +18,7 @@
 #import "GAManager.h"
 #import <Raygun4iOS/Raygun.h>
 #import "PNGFullScreenViewController.h"
+#import "PNGClassifieds.h"
 
 @implementation PNGAppDelegate
 
@@ -112,6 +113,7 @@
     [PNGStory registerSubclass];
     [PNGFile registerSubclass];
     [PNGComment registerSubclass];
+    [PNGClassifieds registerSubclass];
     [Parse setApplicationId:PARSE_APPLICATION_ID
                   clientKey:PARSE_CLIENT_KEY];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

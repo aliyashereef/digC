@@ -4,30 +4,6 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>Social</string>
-	</dict>
-	<dict>
-		<key>title</key>
-		<string>Real Estate</string>
-	</dict>
-	<dict>
-		<key>title</key>
-		<string>Buy and sell</string>
-	</dict>
-	<dict>
-		<key>title</key>
-		<string>Jobs</string>
-	</dict>
-	<dict>
-		<key>title</key>
-		<string>Business for sale</string>
-	</dict>
-	<dict>
-		<key>title</key>
-		<string>Skills &amp; Services</string>
-	</dict>
-	<dict>
-		<key>title</key>
 		<string>PNG News</string>
 		<key>categoryId</key>
 		<string>187</string>
@@ -35,6 +11,8 @@
 		<string>1435506394</string>
 		<key>ad_id_overlay</key>
 		<string>0435490871</string>
+		<key>parentId</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>ad_id_overlay</key>
@@ -98,6 +76,8 @@
 		<string>Regional News</string>
 		<key>categoryId</key>
 		<string>183</string>
+		<key>parentId</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>ad_id_overlay</key>
@@ -108,6 +88,8 @@
 		<string>Encompass</string>
 		<key>categoryId</key>
 		<string>181</string>
+		<key>parentId</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>ad_id_overlay</key>
@@ -118,6 +100,8 @@
 		<string>Business</string>
 		<key>categoryId</key>
 		<string>185</string>
+		<key>parentId</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>ad_id_overlay</key>
@@ -128,6 +112,8 @@
 		<string>Entertainment</string>
 		<key>categoryId</key>
 		<string>184</string>
+		<key>parentId</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>ad_id_overlay</key>
@@ -138,6 +124,8 @@
 		<string>Sport</string>
 		<key>categoryId</key>
 		<string>180</string>
+		<key>parentId</key>
+		<integer>1</integer>
 	</dict>
 	<dict>
 		<key>ad_id_overlay</key>
@@ -148,6 +136,56 @@
 		<string>World</string>
 		<key>categoryId</key>
 		<string>182</string>
+		<key>parentId</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Real Estate</string>
+		<key>categoryId</key>
+		<string>71</string>
+		<key>parentId</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Social</string>
+		<key>categoryId</key>
+		<string>21</string>
+		<key>parentId</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Buy and sell</string>
+		<key>categoryId</key>
+		<string>101</string>
+		<key>parentId</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Jobs</string>
+		<key>categoryId</key>
+		<string>141</string>
+		<key>parentId</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Business for sale</string>
+		<key>categoryId</key>
+		<string>1</string>
+		<key>parentId</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Skills &amp; Services</string>
+		<key>categoryId</key>
+		<string>221</string>
+		<key>parentId</key>
+		<integer>0</integer>
 	</dict>
 </array>
 </plist>

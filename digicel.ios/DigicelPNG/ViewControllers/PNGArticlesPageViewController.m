@@ -283,31 +283,59 @@ typedef enum {
     NSNumber *categoryId = [NSNumber numberWithInt:[[category valueForKey:@"categoryId"] intValue]];
     resultsViewController.category = category;
     resultsViewController.searchFieldText= searchField.text;
-    PFQuery *titleQuery = [PNGArticle query];
-    [titleQuery whereKey:@"title" matchesRegex:[NSString stringWithString:searchField.text.lowercaseString] modifiers:@"i"];
-    PFQuery *contentQuery = [PNGArticle query];
-    [contentQuery whereKey:@"content" matchesRegex:[NSString stringWithString:searchField.text.lowercaseString] modifiers:@"i"];
-    PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery,contentQuery]];
-    [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
-    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
-    [query orderBySortDescriptor:sortDesc];
-    query.limit=kNoOfCellInSearchView;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            resultsViewController.articles =[[NSMutableArray alloc]initWithArray:objects];
-            searchResultsContainer.hidden = NO;
-            [self changecontainerVisibiityForState:ShowResultsView];
-        } else {
-            // Log details of the failure
-            NSString *errorMsg = error.localizedDescription;
-            if(error.code == 100) {
-                errorMsg = NSLocalizedString(@"NO_INTERNET", @"");
+    
+    if ([[category valueForKeyPath:@"parentId"] isEqualToNumber:[NSNumber numberWithInt:1]]){
+        PFQuery *titleQuery = [PNGArticle query];
+        [titleQuery whereKey:@"title" matchesRegex:[NSString stringWithString:searchField.text.lowercaseString] modifiers:@"i"];
+        PFQuery *contentQuery = [PNGArticle query];
+        [contentQuery whereKey:@"content" matchesRegex:[NSString stringWithString:searchField.text.lowercaseString] modifiers:@"i"];
+        PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery,contentQuery]];
+        [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
+        NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
+        [query orderBySortDescriptor:sortDesc];
+        query.limit=kNoOfCellInSearchView;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                resultsViewController.articles =[[NSMutableArray alloc]initWithArray:objects];
+                searchResultsContainer.hidden = NO;
+                [self changecontainerVisibiityForState:ShowResultsView];
+            } else {
+                // Log details of the failure
+                NSString *errorMsg = error.localizedDescription;
+                if(error.code == 100) {
+                    errorMsg = NSLocalizedString(@"NO_INTERNET", @"");
+                }
+                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
             }
-            [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
-        }
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+    }else{
+        PFQuery *titleQuery = [PNGClassifieds query];
+        [titleQuery whereKey:@"ad_category" equalTo:[NSString stringWithString:searchField.text]];
+        PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery]];
+        [query whereKey:@"ad_category_parent_id" equalTo:[NSString stringWithFormat:(@"%@"),categoryId]];
+        NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
+        [query orderBySortDescriptor:sortDesc];
+        query.limit=kNoOfCellInSearchView;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                resultsViewController.articles =[[NSMutableArray alloc]initWithArray:objects];
+                searchResultsContainer.hidden = NO;
+                [self changecontainerVisibiityForState:ShowResultsView];
+            }else{
+                // Log details of the failure
+                NSString *errorMsg = error.localizedDescription;
+                if(error.code == 100) {
+                    errorMsg = NSLocalizedString(@"NO_INTERNET", @"");
+                }
+                [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
+            }
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+        }];
+    }
 }
 
 //  Creates an array of view controllers for the pageview controller.
@@ -632,7 +660,6 @@ typedef enum {
         [self.view bringSubviewToFront:madsOverlayAdView];
     }
 }
-
 
 #pragma mark - ArticlesTableSelectionDelegate
 
