@@ -30,6 +30,11 @@
 
 #endif
 
+//Parent ID
+#define kArticles                [NSNumber numberWithInt:1]
+
+//Parse Error Code 
+#define kNo_Internet_Connection  100
 
 //Google Analytics
 #define GA_TRACKING_ID @"UA-53115675-1" //Test account

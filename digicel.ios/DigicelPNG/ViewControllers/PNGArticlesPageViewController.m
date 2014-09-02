@@ -284,7 +284,7 @@ typedef enum {
     resultsViewController.category = category;
     resultsViewController.searchFieldText= searchField.text;
     
-    if ([[category valueForKeyPath:@"parentId"] isEqualToNumber:[NSNumber numberWithInt:1]]){
+    if ([[category valueForKeyPath:@"parentId"] isEqualToNumber:kArticles]){
         PFQuery *titleQuery = [PNGArticle query];
         [titleQuery whereKey:@"title" matchesRegex:[NSString stringWithString:searchField.text.lowercaseString] modifiers:@"i"];
         PFQuery *contentQuery = [PNGArticle query];
@@ -293,7 +293,7 @@ typedef enum {
         [query whereKey:@"category" containsAllObjectsInArray:@[categoryId]];
         NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
         [query orderBySortDescriptor:sortDesc];
-        query.limit=kNoOfCellInSearchView;
+        query.limit = kNoOfCellInSearchView;
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
@@ -303,7 +303,7 @@ typedef enum {
             } else {
                 // Log details of the failure
                 NSString *errorMsg = error.localizedDescription;
-                if(error.code == 100) {
+                if(error.code == kNo_Internet_Connection) {
                     errorMsg = NSLocalizedString(@"NO_INTERNET", @"");
                 }
                 [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
@@ -317,17 +317,17 @@ typedef enum {
         [query whereKey:@"ad_category_parent_id" equalTo:[NSString stringWithFormat:(@"%@"),categoryId]];
         NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
         [query orderBySortDescriptor:sortDesc];
-        query.limit=kNoOfCellInSearchView;
+        query.limit = kNoOfCellInSearchView;
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 resultsViewController.articles =[[NSMutableArray alloc]initWithArray:objects];
-                searchResultsContainer.hidden = NO;
+                searchResultsContainer.hidden  = NO;
                 [self changecontainerVisibiityForState:ShowResultsView];
             }else{
                 // Log details of the failure
                 NSString *errorMsg = error.localizedDescription;
-                if(error.code == 100) {
+                if(error.code == kNo_Internet_Connection) {
                     errorMsg = NSLocalizedString(@"NO_INTERNET", @"");
                 }
                 [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
