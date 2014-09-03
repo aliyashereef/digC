@@ -31,7 +31,7 @@
 //  Setter method for article
 - (void)setArticle:(PNGArticle *)article{
     _article = article;
-    if ( _parent == [NSNumber numberWithInt:1]){
+    if ( _parent == ARTICLES){
         articleTitleLabel.text = article.title;
         [articleImageView setImageWithURL:[NSURL URLWithString:article.thumbNailImageUrl]
                      placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];

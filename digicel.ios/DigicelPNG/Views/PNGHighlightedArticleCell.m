@@ -36,7 +36,7 @@
 
 - (void)setArticle:(PNGArticle *)article {
     [super setArticle:article];
-    if (self.parent == [NSNumber numberWithInt:1]){
+    if (self.parent == ARTICLES){
     [articleImageView setImageWithURL:[NSURL URLWithString:article.postImageURL]
                      placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleFeatured]];
         CGSize reqSize = [PNGUtilities getRequiredSizeForText:article.title

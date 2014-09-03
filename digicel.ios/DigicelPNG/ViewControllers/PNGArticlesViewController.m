@@ -36,7 +36,7 @@
     articlesFinished = NO;
     allArticles = [[NSMutableArray alloc] init];
     articlesArray = [[NSMutableArray alloc] init];
-    if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+    if ([_category valueForKey:@"parentId"] == ARTICLES){
         [self fetchCategoryArticles];
     }else{
         [self fetchClassifiedArticles];
@@ -278,7 +278,7 @@
 - (void)subCategorySelected:(NSNotification *)notification {
     subCategoryViewController.view.hidden = YES;
     self.category = notification.object;
-    if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+    if ([_category valueForKey:@"parentId"] == ARTICLES){
         [self fetchCategoryArticles];
     }else{
         [self fetchClassifiedArticles];
@@ -314,7 +314,7 @@
     } else if([article isKindOfClass:[NSString class]]) {
         return kLoadMoreCellHeight;
     } else {
-        if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+        if ([_category valueForKey:@"parentId"] == ARTICLES){
             switch (article.type) {
                 case FeaturedArticle:
                     return kFeaturedCellHeight;
@@ -348,7 +348,7 @@
     if([article isKindOfClass:[NSNull class]]) {
         cell = [self loadAdvertCell:tableView cellForRowAtIndexPath:indexPath];
     } else {
-        if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+        if ([_category valueForKey:@"parentId"] == ARTICLES){
 
             switch (article.type) {
                 case FeaturedArticle:
@@ -446,7 +446,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id object = [articlesArray objectAtIndex:indexPath.row];
     if(![object isKindOfClass:[NSNull class]]) {
-        if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+        if ([_category valueForKey:@"parentId"] == ARTICLES){
             selectedArticle = [articlesArray objectAtIndex:indexPath.row];
             if(selectedArticle.type != PromotedArticle) { //    For promoted articles, we have 2 buttons in single cell
                 [self performSegueWithIdentifier:PNGStoryboardViewControllerArticleDetail sender:self];
@@ -489,7 +489,7 @@
 //	[self reloadTableViewDataSource];
 //	[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:0.5];
     [[NSNotificationCenter defaultCenter] postNotificationName:kRefreshTriggeredNotification object:nil];
-    if ([_category valueForKey:@"parentId"] == [NSNumber numberWithInt:1]){
+    if ([_category valueForKey:@"parentId"] == ARTICLES){
         [self fetchCategoryArticles];
     }else{
         [self fetchClassifiedArticles];
