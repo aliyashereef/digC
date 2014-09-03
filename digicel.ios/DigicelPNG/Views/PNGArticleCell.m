@@ -36,9 +36,16 @@
         [articleImageView setImageWithURL:[NSURL URLWithString:article.thumbNailImageUrl]
                      placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];
     }else{
-        articleTitleLabel.text = [article valueForKey:@"ad_category"];
-        [articleImageView setImageWithURL:[NSURL URLWithString:[[[article valueForKey:@"ad_images"] objectAtIndex:0] valueForKey:@"path"]]
-                         placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];
+        articleTitleLabel.text = [article valueForKey:@"ad_title"];
+        
+        NSArray *images = [article valueForKey:@"ad_images"];
+        
+        if(images && [images count] > 0) {
+            NSDictionary *imageDict = [images firstObject];
+            NSString *imagePath     = [imageDict valueForKey:@"path"];
+            [articleImageView setImageWithURL:[NSURL URLWithString:imagePath]
+                             placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];
+        }
     }
 }
 

@@ -284,7 +284,7 @@ typedef enum {
     resultsViewController.category = category;
     resultsViewController.searchFieldText= searchField.text;
     
-    if ([[category valueForKeyPath:@"parentId"] isEqualToNumber:kArticles]){
+    if ([[category valueForKeyPath:@"parentId"] isEqualToNumber:ARTICLES]){
         PFQuery *titleQuery = [PNGArticle query];
         [titleQuery whereKey:@"title" matchesRegex:[NSString stringWithString:searchField.text.lowercaseString] modifiers:@"i"];
         PFQuery *contentQuery = [PNGArticle query];
@@ -303,7 +303,7 @@ typedef enum {
             } else {
                 // Log details of the failure
                 NSString *errorMsg = error.localizedDescription;
-                if(error.code == kNo_Internet_Connection) {
+                if(error.code == NO_INTERNET_CONNECTION) {
                     errorMsg = NSLocalizedString(@"NO_INTERNET", @"");
                 }
                 [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
@@ -312,7 +312,7 @@ typedef enum {
         }];
     }else{
         PFQuery *titleQuery = [PNGClassifieds query];
-        [titleQuery whereKey:@"ad_category" equalTo:[NSString stringWithString:searchField.text]];
+        [titleQuery whereKey:@"ad_title" matchesRegex:[NSString stringWithString:searchField.text.lowercaseString] modifiers:@"i"];
         PFQuery *query = [PFQuery orQueryWithSubqueries:@[titleQuery]];
         [query whereKey:@"ad_category_parent_id" equalTo:[NSString stringWithFormat:(@"%@"),categoryId]];
         NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"publishedDate" ascending:NO];
@@ -327,7 +327,7 @@ typedef enum {
             }else{
                 // Log details of the failure
                 NSString *errorMsg = error.localizedDescription;
-                if(error.code == kNo_Internet_Connection) {
+                if(error.code == NO_INTERNET_CONNECTION) {
                     errorMsg = NSLocalizedString(@"NO_INTERNET", @"");
                 }
                 [PNGUtilities showAlertWithTitle:NSLocalizedString(@"FAILED", @"") message:errorMsg];
@@ -634,7 +634,6 @@ typedef enum {
     NSDictionary *category = notification.object;
     regionCategoryLabel.text = [category valueForKey:@"title"];
 }
-
 
 //Adding overlay ads in view
 - (void)addOverlayAd {

@@ -78,7 +78,6 @@
     return article;
 }
 
-
 - (void)setArticleDetails:(NSDictionary *)articleDictionary {
     if(!articleDictionary)
         return;

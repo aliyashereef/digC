@@ -31,9 +31,23 @@
 //  Setter method for article
 - (void)setSecondArticle:(PNGArticle *)secondArticle {
     _secondArticle = secondArticle;
-    secondArticleTitleLabel.text = secondArticle.title;
-    [secondArticleImageView setImageWithURL:[NSURL URLWithString:secondArticle.thumbNailImageUrl]
+    if ( self.parent == [NSNumber numberWithInt:1]){
+        secondArticleTitleLabel.text = secondArticle.title;
+        [secondArticleImageView setImageWithURL:[NSURL URLWithString:secondArticle.thumbNailImageUrl]
                            placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleColumn]];
+    }else{
+        secondArticleTitleLabel.text = [secondArticle valueForKey:@"ad_title"];
+        
+        NSArray *images = [secondArticle valueForKey:@"ad_images"];
+        
+        if(images && [images count] > 0) {
+            NSDictionary *imageDict = [images firstObject];
+            NSString *imagePath     = [imageDict valueForKey:@"path"];
+            [secondArticleImageView setImageWithURL:[NSURL URLWithString:imagePath]
+                             placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];
+        }
+    }
+
 }
 
 @end

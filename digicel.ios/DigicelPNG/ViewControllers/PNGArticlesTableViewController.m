@@ -81,6 +81,7 @@
         if(cell == nil) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];
         }
+        cell.parent  = [_category valueForKey:@"parentId"];
         cell.article = article;
         if(indexPath.row == _allArticles.count-1 && !articlesFinished ) {
             indexForLoadMore++;

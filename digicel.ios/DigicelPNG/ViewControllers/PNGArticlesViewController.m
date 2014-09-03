@@ -217,17 +217,23 @@
 //  Fetch articles of a particular classified.
 - (void)fetchClassifiedArticles{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if(articlesArray) {
-        [articlesArray removeAllObjects];
-    }
+
     PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
     [query whereKey:@"ad_category_parent_id" equalTo:[_category valueForKey:@"categoryId"]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self doneLoadingTableViewData];
         if (!error) {
+            
+            if(articlesArray) {
+                [articlesArray removeAllObjects];
+            }
             for (PFObject *object in objects) {
                 [articlesArray addObject:object];
+            }
+            if (articlesArray.count > 2) {
+                secondPromotedArticle = [articlesArray objectAtIndex:2];
+                [articlesArray removeObjectAtIndex:2];
             }
             [articlesTable reloadData];
         } else {
@@ -321,7 +327,17 @@
                     break;
             }
         }else{
-            return kListTypeCellHeight;
+            switch (indexPath.row){
+                case 0:
+                    return kFeaturedCellHeight;
+                    break;
+                case 1:
+                    return kPromotedCellHeight;
+                    break;
+                default:
+                    return kListTypeCellHeight;
+                break;
+            }
         }
     }
 }
@@ -346,7 +362,18 @@
                     break;
             }
         }else{
-            cell = [self loadListArticleCell:tableView cellForRowAtIndexPath:indexPath];
+            switch (indexPath.row){
+                case 0:
+                    cell = [self loadHighlightedArticleCell:tableView cellForRowAtIndexPath:indexPath];
+                    break;
+                case 1:
+                    cell = [self loadPromotedArticleCell:tableView cellForRowAtIndexPath:indexPath];
+                    break;
+                default:
+                    cell = [self loadListArticleCell:tableView cellForRowAtIndexPath:indexPath];
+                    break;
+            }
+            
         }
         if(indexPath.row == articlesArray.count-1 && !articlesFinished) {
             [self loadMoreButtonAction:nil];
@@ -378,6 +405,7 @@
     if(cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGHighlightedArticleCell" owner:nil options:nil] firstObject];
     }
+    cell.parent  = [_category valueForKey:@"parentId"];
     cell.article = [articlesArray objectAtIndex:indexPath.row];
     return cell;
 }
@@ -389,8 +417,8 @@
     if(cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGListArticleCell" owner:nil options:nil] firstObject];  
     }
-    cell.article = [articlesArray objectAtIndex:indexPath.row];
     cell.parent  = [_category valueForKey:@"parentId"];
+    cell.article = [articlesArray objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -401,6 +429,7 @@
     if(cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"PNGPromotedArticleCell" owner:nil options:nil] firstObject];
     }
+    cell.parent  = [_category valueForKey:@"parentId"];
     cell.article = [articlesArray objectAtIndex:indexPath.row];
     if(secondPromotedArticle) {
         cell.secondArticle = secondPromotedArticle;

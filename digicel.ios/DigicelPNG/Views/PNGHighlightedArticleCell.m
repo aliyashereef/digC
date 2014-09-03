@@ -36,16 +36,37 @@
 
 - (void)setArticle:(PNGArticle *)article {
     [super setArticle:article];
+    if (self.parent == [NSNumber numberWithInt:1]){
     [articleImageView setImageWithURL:[NSURL URLWithString:article.postImageURL]
                      placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleFeatured]];
-    //  Calculating required height for the title label.
-    CGSize reqSize = [PNGUtilities getRequiredSizeForText:article.title
-                                                     font:[UIFont fontWithName:@"Lato-Bold" size:24]
-                                                 maxWidth:articleTitleLabel.frame.size.width];
-    if(reqSize.height > 30) {
-        titleViewHeight.constant = kTitleViewTwoLineHeight;
-    } else {
-        titleViewHeight.constant = kTitleViewSingleLineHeight;
+        CGSize reqSize = [PNGUtilities getRequiredSizeForText:article.title
+                                                         font:[UIFont fontWithName:@"Lato-Bold" size:24]
+                                                     maxWidth:articleTitleLabel.frame.size.width];
+        //  Calculating required height for the title label.
+        if(reqSize.height > 30) {
+            titleViewHeight.constant = kTitleViewTwoLineHeight;
+        } else {
+            titleViewHeight.constant = kTitleViewSingleLineHeight;
+        }
+    }else{
+        
+        NSArray *images = [article valueForKey:@"ad_images"];
+        
+        if(images && [images count] > 0) {
+            NSDictionary *imageDict = [images firstObject];
+            NSString *imagePath     = [imageDict valueForKey:@"path"];
+            [articleImageView setImageWithURL:[NSURL URLWithString:imagePath]
+                             placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];
+            CGSize reqSize = [PNGUtilities getRequiredSizeForText:[imageDict valueForKey:@"path"]
+                                                         font:[UIFont fontWithName:@"Lato-Bold" size:24]
+                                                     maxWidth:articleTitleLabel.frame.size.width];
+        //  Calculating required height for the title label.
+            if(reqSize.height > 30) {
+                titleViewHeight.constant = kTitleViewTwoLineHeight;
+            } else {
+                titleViewHeight.constant = kTitleViewSingleLineHeight;
+            }
+        }
     }
 }
 
