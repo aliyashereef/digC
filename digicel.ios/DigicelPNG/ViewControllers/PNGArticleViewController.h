@@ -43,5 +43,6 @@
 @property (nonatomic, strong) PNGArticle *article;
 @property (nonatomic, strong) NSArray *articles;
 @property (nonatomic, strong) NSDictionary *selectedCategory;
+@property (nonatomic, strong) NSNumber *parentId;
 
 @end

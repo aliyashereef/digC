@@ -102,8 +102,13 @@
 //  show detail view of the selected promoted article.
 - (IBAction)showPromotedArticle:(id)sender {
     NSInteger index = [sender tag];
-    if(index < promotedArticles.count) {
-        selectedArticle = [promotedArticles objectAtIndex:index];
+    if (articlesArray.count > 2) {
+        if(index < promotedArticles.count) {
+            selectedArticle = [promotedArticles objectAtIndex:index];
+            [self performSegueWithIdentifier:PNGStoryboardViewControllerArticleDetail sender:self];
+        }
+    }else if (articlesArray.count == 2){
+        selectedArticle = (PNGArticle *)promotedArticles;
         [self performSegueWithIdentifier:PNGStoryboardViewControllerArticleDetail sender:self];
     }
 }
@@ -225,15 +230,34 @@
         [self doneLoadingTableViewData];
         if (!error) {
             
+            if(allArticles) {
+                [allArticles removeAllObjects];
+            }
             if(articlesArray) {
                 [articlesArray removeAllObjects];
             }
             for (PFObject *object in objects) {
                 [articlesArray addObject:object];
+                [allArticles addObject:object];
             }
             if (articlesArray.count > 2) {
-                secondPromotedArticle = [articlesArray objectAtIndex:2];
-                [articlesArray removeObjectAtIndex:2];
+                NSArray *promoted = @[[articlesArray objectAtIndex:1],[articlesArray objectAtIndex:2]];
+                if(promoted.count > 1) {
+                    PNGArticle *promotedArticle1 = promoted.firstObject;
+                    secondPromotedArticle = [promoted objectAtIndex:1];
+                    promotedArticles = @[promotedArticle1,secondPromotedArticle];
+                    [allArticles addObjectsFromArray:@[promotedArticle1,secondPromotedArticle]];
+                    [articlesArray addObject:promotedArticle1];
+                } else if(promoted.count > 0) {
+                    PNGArticle *promotedArticle = promoted.firstObject;
+                    promotedArticle.type = PromotedArticle;
+                    promotedArticles = @[promotedArticle];
+                    [allArticles addObject:promotedArticle];
+                    [articlesArray addObject:promotedArticle];
+                }
+                    [articlesArray removeObjectAtIndex:2];
+            }else{
+                promotedArticles = [articlesArray objectAtIndex:1];
             }
             [articlesTable reloadData];
         } else {
@@ -446,13 +470,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     id object = [articlesArray objectAtIndex:indexPath.row];
     if(![object isKindOfClass:[NSNull class]]) {
+        selectedArticle = [articlesArray objectAtIndex:indexPath.row];
         if ([_category valueForKey:@"parentId"] == ARTICLES){
-            selectedArticle = [articlesArray objectAtIndex:indexPath.row];
             if(selectedArticle.type != PromotedArticle) { //    For promoted articles, we have 2 buttons in single cell
                 [self performSegueWithIdentifier:PNGStoryboardViewControllerArticleDetail sender:self];
             }
         }else{
-            [self performSegueWithIdentifier:PNGStoryboardViewControllerArticleDetail sender:self];
+            if(indexPath.row != 1){
+                [self performSegueWithIdentifier:PNGStoryboardViewControllerArticleDetail sender:self];
+            }
         }
     }
 }

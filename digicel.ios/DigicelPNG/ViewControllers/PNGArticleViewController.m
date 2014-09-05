@@ -93,12 +93,29 @@
     } else {
         coachMarkTop.hidden = NO;
     }
-    [articleImageView setImageWithURL:[NSURL URLWithString:_article.postImageURL] placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleFeatured]];
-    titleLabel.text = _article.title;
-    publishDataLabel.text = [NSString stringWithFormat:@"%@    |    %@",_article.authorName,_article.publishedDate];
-    contentLabel.text = _article.content;
+    if ([[_selectedCategory valueForKeyPath:@"parentId"] isEqualToNumber:ARTICLES]) {
+        [articleImageView setImageWithURL:[NSURL URLWithString:_article.postImageURL] placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleFeatured]];
+        titleLabel.text = _article.title;
+        publishDataLabel.text = [NSString stringWithFormat:@"%@    |    %@",_article.authorName,_article.publishedDate];
+        contentLabel.text = _article.content;
+        
+    }else{
+        titleLabel.text = [_article valueForKey:@"ad_title"];
+        
+        NSArray *images = [_article valueForKey:@"ad_images"];
+        
+        if(images && [images count] > 0) {
+            NSDictionary *imageDict = [images firstObject];
+            NSString *imagePath     = [imageDict valueForKey:@"path"];
+            [articleImageView setImageWithURL:[NSURL URLWithString:imagePath]
+                             placeholderImage:[UIImage imageNamed:PNGStoryboardImageArticleList]];
+        }
+        contentLabel.text = [_article valueForKey:@"ad_details"];
+        publishDataLabel.text = [NSString stringWithFormat:@"%@    |    %@", [_article valueForKey:@"display_name"], [_article valueForKey:@"ad_startdate"]];
+    }
     int index = (int)[_articles indexOfObject:_article];
     indexLabel.text = [NSString stringWithFormat:@"%d of %d",++index,(int)_articles.count];
+ 
     [self updateViewFrames];
 }
 
@@ -111,46 +128,87 @@
 //    } else {
 //        imageContainerHeight.constant = 0;
 //    }
-    
-    if (_article.postImageURL.length > 0) {
-            imageContainerHeight.constant = kImageViewHeight;
-    } else {
-            imageContainerHeight.constant = 0;
-    }
+    if ([[_selectedCategory valueForKeyPath:@"parentId"] isEqualToNumber:ARTICLES]) {
+        if (_article.postImageURL.length > 0) {
+                imageContainerHeight.constant = kImageViewHeight;
+        } else {
+                imageContainerHeight.constant = 0;
+        }
 
    
-    NSString *publishData = [NSString stringWithFormat:@"%@    |    %@",_article.authorName,_article.publishedDate];
+        NSString *publishData = [NSString stringWithFormat:@"%@    |    %@",_article.authorName,_article.publishedDate];
     
-    //  Calculating required height for the title label.
-    CGSize reqSize = [PNGUtilities getRequiredSizeForText:_article.title
-                                                            font:[UIFont fontWithName:@"Lato-Bold" size:24]
-                                                        maxWidth:titleLabel.frame.size.width];
-    // Calculating required height for publish data label.
-    CGSize reqSizeOfPublishData =[PNGUtilities getRequiredSizeForText:publishData
-                                                            font:[UIFont fontWithName:@"Lato-Bold" size:12]
-                                                        maxWidth:publishDataLabel.frame.size.width];
-    //Changing height of title label according to title size.
-    titleLabelHeight.constant=reqSize.height+2;
+        //  Calculating required height for the title label.
+        CGSize reqSize = [PNGUtilities getRequiredSizeForText:_article.title
+                                                         font:[UIFont fontWithName:@"Lato-Bold" size:24]
+                                                     maxWidth:titleLabel.frame.size.width];
+        // Calculating required height for publish data label.
+        CGSize reqSizeOfPublishData = [PNGUtilities getRequiredSizeForText:publishData
+                                                                     font:[UIFont fontWithName:@"Lato-Bold" size:12]
+                                                                 maxWidth:publishDataLabel.frame.size.width];
+        //Changing height of title label according to title size.
+        titleLabelHeight.constant = reqSize.height+2;
     
-    //Changing height of label according to the text size.
-    authorDataLabelHeight.constant=reqSizeOfPublishData.height;
+        //Changing height of label according to the text size.
+        authorDataLabelHeight.constant = reqSizeOfPublishData.height;
     
-    //  title label height + publish data label height + padding
-    titleContainerHeight.constant = titleLabelHeight.constant +
+        //  title label height + publish data label height + padding
+        titleContainerHeight.constant = titleLabelHeight.constant +
                                     authorDataLabelHeight.constant+
                                     kTitleViewPadding;
 
-    //  Calculating required height for the content label.
-    reqSize = [PNGUtilities getRequiredSizeForText:_article.content
+        //  Calculating required height for the content label.
+        reqSize = [PNGUtilities getRequiredSizeForText:_article.content
                                               font:[UIFont fontWithName:@"Lato-Regular" size:15]
                                           maxWidth:contentLabel.frame.size.width];
-    contentContainerHeight.constant = reqSize.height;
-    adsViewHeight.constant = madsAdView.contentSize.height;
-    mainViewHeight.constant = imageContainerHeight.constant +
+        contentContainerHeight.constant = reqSize.height;
+        mainViewHeight.constant = imageContainerHeight.constant +
                               titleContainerHeight.constant +
                               pageInfoViewHeight.constant +
                               reqSize.height +
                               madsAdView.contentSize.height;
+    }else{
+        
+        if ([[[[_article valueForKey:@"ad_images"] firstObject] valueForKey:@"path"] length] > 0) {
+            imageContainerHeight.constant = kImageViewHeight;
+        } else {
+            imageContainerHeight.constant = 0;
+        }
+        
+        
+        NSString *publishData = [NSString stringWithFormat:@"%@    |    %@", [_article valueForKey:@"display_name"], [_article valueForKey:@"ad_startdate"]];
+        
+        //  Calculating required height for the title label.
+        CGSize reqSize = [PNGUtilities getRequiredSizeForText:[_article valueForKey:@"ad_title"]
+                                                         font:[UIFont fontWithName:@"Lato-Bold" size:24]
+                                                     maxWidth:titleLabel.frame.size.width];
+        // Calculating required height for publish data label.
+        CGSize reqSizeOfPublishData = [PNGUtilities getRequiredSizeForText:publishData
+                                                                     font:[UIFont fontWithName:@"Lato-Bold" size:12]
+                                                                 maxWidth:publishDataLabel.frame.size.width];
+        //Changing height of title label according to title size.
+        titleLabelHeight.constant = reqSize.height+2;
+        
+        //Changing height of label according to the text size.
+        authorDataLabelHeight.constant= reqSizeOfPublishData.height;
+        
+        //  title label height + publish data label height + padding
+        titleContainerHeight.constant = titleLabelHeight.constant +
+        authorDataLabelHeight.constant+
+        kTitleViewPadding;
+        
+        //  Calculating required height for the content label.
+        reqSize = [PNGUtilities getRequiredSizeForText:[_article valueForKey:@"ad_details"]
+                                                  font:[UIFont fontWithName:@"Lato-Regular" size:15]
+                                              maxWidth:contentLabel.frame.size.width];
+        contentContainerHeight.constant = reqSize.height;
+        mainViewHeight.constant = imageContainerHeight.constant +
+        titleContainerHeight.constant +
+        pageInfoViewHeight.constant +
+        reqSize.height +
+        madsAdView.contentSize.height;
+    }
+    adsViewHeight.constant = madsAdView.contentSize.height;
     [self.view layoutSubviews];
 }
 
@@ -195,7 +253,17 @@
 {
     if ([segue.identifier isEqualToString:@"fullScreenImageView"]) {
         PNGFullScreenViewController *fullScreen = [segue destinationViewController];
-        fullScreen.imageUrl = _article.postImageURL;
+        if ([[_selectedCategory valueForKeyPath:@"parentId"] isEqualToNumber:ARTICLES]) {
+            fullScreen.imageUrl = _article.postImageURL;
+        }else{
+            NSArray *images = [_article valueForKey:@"ad_images"];
+            
+            if(images && [images count] > 0) {
+                NSDictionary *imageDict = [images firstObject];
+                NSString *imagePath     = [imageDict valueForKey:@"path"];
+                fullScreen.imageUrl     = imagePath;
+            }
+        }
     }
 }
 
